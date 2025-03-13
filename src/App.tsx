@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import './App.css'
 import {Header} from "./components/Header.tsx";
-import {Jobs} from "./components/Jobs.tsx";
+import {Jobs} from "./components/jobs/Jobs.tsx";
 
 function App() {
 	const [count, setCount] = useState(0)
