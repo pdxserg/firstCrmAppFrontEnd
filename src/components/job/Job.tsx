@@ -1,4 +1,5 @@
 // @flow
+import styles from './Job.module.css'
 export type JobType = {
 	id:string,
 	jobNumber:number
@@ -15,14 +16,14 @@ type Props={
 export const Job = ({jobs}:Props) => {
 	return (
 		<div>
-			<ul>
+			<ul >
 			{jobs.map(el=>{
-				return <li key={el.id}>
-					<h2>{el.jobNumber}</h2>
-					<h3>{el.customerName}</h3>
-					<p>{el.customerPhone}</p>
-					<p>{el.customerEmail}</p>
-					<p>{el.jobDescription}</p>
+				return <li key={el.id} className={styles.job}>
+					<h2>Job # {el.jobNumber}</h2>
+					<h3>Name: {el.customerName}</h3>
+					<p>Phone: {el.customerPhone}</p>
+					<p>Email: {el.customerEmail}</p>
+					<p>Description: {el.jobDescription}</p>
 				</li>
 			})}
 			</ul>
