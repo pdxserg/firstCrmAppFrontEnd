@@ -1,5 +1,9 @@
-.jobs {
-   border-color: darkorange;
-    min-width: 200px;
-    min-height: 500px;
+.jobsContainer {
+    background-color: #fbd7d7;
+    margin-top: 20px;
 }
+    .jobs {
+
+        min-width: 200px;
+        min-height: 500px;
+    }

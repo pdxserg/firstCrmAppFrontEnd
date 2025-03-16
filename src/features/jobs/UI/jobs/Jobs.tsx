@@ -20,7 +20,7 @@ export const Jobs = () => {
 		</div>;
 	}
 	return (
-		<div>
+		<div className={styles.jobsContainer}>
 			<div>
 				<button onClick={refetch}>Get new data.</button>
 			</div>
