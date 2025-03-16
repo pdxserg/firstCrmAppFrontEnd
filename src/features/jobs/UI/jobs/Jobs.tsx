@@ -11,13 +11,12 @@ import {useGetJobsQuery} from "../../../../jobApi.ts";
 // 	{id:'3', jobNumber: 3 , customerName:'Darren', customerEmail:"@", customerPhone: 3332222, jobDetails:'some description' }
 // ]
 export const Jobs = () => {
-		const{data}=useGetJobsQuery()
-	console.log("this url",import.meta.env.VITE_API_URL);
 
-	console.log(data?.items)
+		const{data}=useGetJobsQuery()
+
 	if (!data) {
 		return <div>No jobs found.
-			<button>Search1</button>
+			<button>Search2</button>
 		</div>;
 	}
 	return (
