@@ -15,9 +15,10 @@ export const jobsApi = createApi({
 	endpoints: build => {
 		return {
 			getJobs: build.query<JobType[], void>({
+
 				query: () => {
 					return {
-						url: 'jobs',
+						url: '/api/jobs',
 						method: 'GET',
 					}
 				},

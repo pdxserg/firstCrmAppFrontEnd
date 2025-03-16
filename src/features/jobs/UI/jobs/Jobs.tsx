@@ -11,6 +11,7 @@ import {useGetJobsQuery} from "../../../../jobApi.ts";
 // ]
 export const Jobs = () => {
 const{data}=useGetJobsQuery()
+	console.log(data)
 	if (!data) {
 		return <div>No jobs found.
 			<button>Search</button>
