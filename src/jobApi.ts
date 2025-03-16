@@ -1,12 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {JobType} from "./features/jobs/UI/job/Job.tsx";
 
+type Response ={
+	totalCount:number,
+	resultCode: number,
+	items: JobType[]
 
+}
 export const jobsApi = createApi({
 	reducerPath: 'jobsApi',
 	baseQuery: fetchBaseQuery({
 		// baseUrl: process.env.VITE_API_URL,
-		baseUrl: import.meta.env.VITE_API_URL || '',
+		baseUrl: import.meta.env.VITE_API_URL,
 		// prepareHeaders: headers => {
 		// 	headers.set('API-KEY', `${process.env.REACT_APP_API_KEY}`)
 		// 	headers.set('Authorization', `Bearer ${localStorage.getItem('sn-token')}`)
@@ -14,8 +19,7 @@ export const jobsApi = createApi({
 	}),
 	endpoints: build => {
 		return {
-			getJobs: build.query<JobType[], void>({
-
+			getJobs: build.query<Response, void>({
 				query: () => {
 					return {
 						url: '/api/jobs',
