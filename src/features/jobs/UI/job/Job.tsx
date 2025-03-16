@@ -29,7 +29,8 @@ export const Job = ({jobs}: Props) => {
 	// 		})
 	// }
 	const deleteJobHandler=(id:string)=>{
-		deleteTask({ id})
+
+		deleteTask( id)
 	}
 	return (
 		<>

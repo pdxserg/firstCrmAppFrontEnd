@@ -17,6 +17,7 @@ export const jobsApi = createApi({
 		// 	headers.set('Authorization', `Bearer ${localStorage.getItem('sn-token')}`)
 		// },
 	}),
+	tagTypes:["Jobs"],
 	endpoints: build => {
 		return {
 			getJobs: build.query<Response, void>({
@@ -26,15 +27,17 @@ export const jobsApi = createApi({
 						method: 'GET',
 					}
 				},
+				providesTags:["Jobs"]
 			}),
 
-			deleteJob: build.mutation<{message:'string'}, {id:string}>({
+			deleteJob: build.mutation<{message:'string'}, string >({
 				query: (id) => {
 					return {
 						method: "DELETE",
 						url: `/api/jobs/${id}`,
 					}
 				},
+				invalidatesTags:["Jobs"]
 			}),
 		}
 	},

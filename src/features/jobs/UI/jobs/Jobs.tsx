@@ -12,7 +12,7 @@ import {useGetJobsQuery} from "../../../../jobApi.ts";
 // ]
 export const Jobs = () => {
 
-		const{data}=useGetJobsQuery()
+		const{data,refetch}=useGetJobsQuery()
 
 	if (!data) {
 		return <div>No jobs found.
@@ -21,9 +21,11 @@ export const Jobs = () => {
 	}
 	return (
 		<div>
-
-		<ul className={styles.jobs}>
-			<Job jobs={data.items}/>
+			<div>
+				<button onClick={refetch}>Get new data.</button>
+			</div>
+			<ul className={styles.jobs}>
+				<Job jobs={data.items}/>
 			</ul>
 		</div>
 	);
