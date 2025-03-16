@@ -14,7 +14,7 @@ export const Jobs = () => {
 
 		const{data,refetch}=useGetJobsQuery()
 
-	if (!data) {
+	if (!data || data.items.length === 0) {
 		return <div>No jobs found.
 			<button>Search2</button>
 		</div>;
