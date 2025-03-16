@@ -32,7 +32,7 @@ export const jobsApi = createApi({
 				query: (id) => {
 					return {
 						method: "DELETE",
-						url: `/api/${id}`,
+						url: `/api/jobs/${id}`,
 					}
 				},
 			}),
