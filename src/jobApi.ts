@@ -37,6 +37,7 @@ export const jobsApi = createApi({
 				jobDetails: string
 			}>({
 				query: ({customerName, customerEmail, customerPhone, jobDetails}) => {
+
 					return {
 						method: "POST",
 						url: `/api/jobs`,
