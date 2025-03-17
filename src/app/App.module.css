@@ -4,6 +4,13 @@
   padding: 2rem;
   text-align: center;
 }
+.boottonToMain{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: lightgreen;
+  padding: 10px;
+}
 
 /*.logo {*/
 /*  height: 6em;*/

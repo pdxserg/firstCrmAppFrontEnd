@@ -1,5 +1,7 @@
-import './App.css'
-import {Routing} from "../common/routing/Routing.tsx";
+import './App.module.css'
+import {Path, Routing} from "../common/routing/Routing.tsx";
+import {Link} from "react-router-dom";
+import styles from './App.module.css'
 
 
 function App() {
@@ -10,6 +12,9 @@ function App() {
 			{/*<div>Jobs</div>*/}
 			{/*<div>Customers</div>*/}
 			{/*<Jobs/>*/}
+			<Link className={styles.boottonToMain} to={Path.Main}>
+				<button>Main</button>
+			</Link>
 			<Routing/>
 
 		</>

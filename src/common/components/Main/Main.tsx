@@ -1,7 +1,6 @@
 // @flow
 
 
-
 import {Path} from "../../routing/Routing.tsx";
 import {Link} from "react-router-dom";
 
@@ -17,6 +16,9 @@ export const Main = () => {
 			</Link>
 			<Link to={Path.NotFound}>
 				<button>Error</button>
+			</Link>
+			<Link to={Path.NewJob}>
+				<button>New Job</button>
 			</Link>
 
 		</div>
