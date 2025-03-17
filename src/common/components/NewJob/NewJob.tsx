@@ -18,6 +18,7 @@ const customerName ="Brad Spring"
 
 const createJobHandler=()=>{
 	createJob({customerName, customerEmail, customerPhone, jobDetails})
+		.then(()=>{alert("Success")})
 }
 	return (
 		<div className={styles.container}>
