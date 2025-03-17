@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {JobType} from "./features/jobs/UI/job/Job.tsx";
 
-type Response ={
-	totalCount:number,
+type Response = {
+	totalCount: number,
 	resultCode: number,
 	items: JobType[]
 
@@ -17,7 +17,7 @@ export const jobsApi = createApi({
 		// 	headers.set('Authorization', `Bearer ${localStorage.getItem('sn-token')}`)
 		// },
 	}),
-	tagTypes:["Jobs"],
+	tagTypes: ["Jobs"],
 	endpoints: build => {
 		return {
 			getJobs: build.query<Response, void>({
@@ -27,21 +27,37 @@ export const jobsApi = createApi({
 						method: 'GET',
 					}
 				},
-				providesTags:["Jobs"]
+				providesTags: ["Jobs"]
 			}),
 
-			deleteJob: build.mutation<{message:'string'}, string >({
+			createJob: build.mutation<JobType, {
+				customerName: string,
+				customerEmail: string,
+				customerPhone: number,
+				jobDetails: string
+			}>({
+				query: ({customerName, customerEmail, customerPhone, jobDetails}) => {
+					return {
+						method: "POST",
+						url: `/api/jobs`,
+						body: {customerName, customerEmail, customerPhone, jobDetails}
+					}
+				},
+				invalidatesTags: ["Jobs"]
+			}),
+
+			deleteJob: build.mutation<{ message: 'string' }, string>({
 				query: (id) => {
 					return {
 						method: "DELETE",
 						url: `/api/jobs/${id}`,
 					}
 				},
-				invalidatesTags:["Jobs"]
+				invalidatesTags: ["Jobs"]
 			}),
 		}
 	},
 })
 
 // 7
-export const { useDeleteJobMutation, useGetJobsQuery } = jobsApi
+export const {useDeleteJobMutation, useGetJobsQuery, useCreateJobMutation} = jobsApi

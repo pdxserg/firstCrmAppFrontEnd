@@ -1,7 +1,10 @@
 import styles from './NewJob.module.css'
+import {useCreateJobMutation} from "../../../jobApi.ts";
 
 
 export const NewJob=()=>{
+	const {}= useCreateJobMutation()
+
 return(
 		<div className={styles.container}>
 
