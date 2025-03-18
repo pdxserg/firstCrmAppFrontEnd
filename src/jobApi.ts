@@ -33,7 +33,7 @@ export const jobsApi = createApi({
 			createJob: build.mutation<JobType, {
 				customerName: string,
 				customerEmail: string,
-				customerPhone: number,
+				customerPhone: string,
 				jobDetails: string
 			}>({
 				query: ({customerName, customerEmail, customerPhone, jobDetails}) => {

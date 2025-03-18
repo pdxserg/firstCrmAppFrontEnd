@@ -7,7 +7,7 @@ export type JobType = {
 	jobNumber: number
 	customerName: string
 	customerEmail: string
-	customerPhone: number
+	customerPhone: string
 	jobDetails: string
 
 };

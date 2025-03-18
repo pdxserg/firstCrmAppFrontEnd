@@ -1,6 +1,8 @@
 import styles from './NewJob.module.css'
 import {useCreateJobMutation} from "../../../jobApi.ts";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
+import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
+import {EmailInput} from "../EmailInput/EmailInput.tsx";
 
 
 // customerName: string,
@@ -11,7 +13,7 @@ export const NewJob = () => {
 
 	 const [customerName, setCustomerName] = useState<string>("")
 	 const [customerEmail, setCustomerEmail] = useState<string>("")
-	 const [customerPhone, setCustomerPhone] = useState<number>(0)
+	 const [customerPhone, setCustomerPhone] = useState<string>("")
 	 const [jobDetails, setJobDetails] = useState<string>("")
 
 
@@ -24,12 +26,22 @@ export const NewJob = () => {
 
 const createJobHandler=()=>{
 	createJob({customerName, customerEmail, customerPhone, jobDetails})
+		.unwrap()
 		.then(()=>{alert("Success")})
+		.catch(()=>{alert("Bud request")})
 }
 
-// const onchangeHandler=(e)=>{
-// 		setCustomerName(e.currentTarget.value)
-// 	}
+const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+		setCustomerName(e.currentTarget.value)
+	}
+
+	const onchangeEmailHandler=(email:string)=>{
+		setCustomerEmail(email)
+	}
+	const onchangePhoneHandler=(phoneNumber:string)=>{
+		setCustomerPhone(phoneNumber)
+	}
+
 	return (
 		<div className={styles.container}>
 
@@ -37,23 +49,19 @@ const createJobHandler=()=>{
 				<h2>Create new job</h2>
 
 				<label htmlFor="name">Name:</label>
+				<br/>
 				<input type="text" id="name" name="name" placeholder="Enter your name"
-				value={customerName} onChange={(e)=>setCustomerName(e.currentTarget.value)}
+				       value={customerName} onChange={onchangeHandler}
 				/>
 				<br/>
-				<label htmlFor="name1">Email:</label><br/>
-				<input type="text" id="name1" name="name1" placeholder="some@gmail.com"
-				       value={customerEmail} onChange={(e)=>setCustomerEmail(e.currentTarget.value)}
-				/>
-				<br/>
-				<label htmlFor="name2">Phone number:</label><br/>
-				<input type="number" id="name2" name="name2" placeholder="333 33 33"
-				       value={customerPhone} onChange={(e)=>setCustomerPhone(parseInt(e.currentTarget.value)||0)}
-				/>
+				<EmailInput onchange={onchangeEmailHandler}/>
+				<PhoneInput onchange={onchangePhoneHandler}/>
+
 				<br/>
 				<label htmlFor="w3review">Description:</label>
+				<br/>
 				<textarea id="w3review" name="w3review" rows={4} cols={50}
-				          value={jobDetails} onChange={(e)=>setJobDetails(e.currentTarget.value)}
+				          value={jobDetails} onChange={(e) => setJobDetails(e.currentTarget.value)}
 				></textarea>
 				<br/>
 				<button onClick={createJobHandler}>Add</button>
