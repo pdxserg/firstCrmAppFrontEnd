@@ -20,15 +20,17 @@ export const jobsApi = createApi({
 	tagTypes: ["Jobs"],
 	endpoints: build => {
 		return {
-			getJobs: build.query<Response, void>({
-				query: () => {
+			getJobs: build.query<Response, { jobNumber:number|null|undefined }>({
+				query: ({jobNumber}) => {
 					return {
 						url: '/api/jobs',
 						method: 'GET',
+						params: jobNumber !== undefined ? { jobNumber } : {},
 					}
 				},
 				providesTags: ["Jobs"]
 			}),
+
 
 			createJob: build.mutation<JobType, {
 				customerName: string,

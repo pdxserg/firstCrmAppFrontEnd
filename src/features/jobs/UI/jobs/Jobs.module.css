@@ -1,9 +1,10 @@
 .jobsContainer {
     background-color: #fbd7d7;
     margin-top: 20px;
+    padding: 10px;
 }
     .jobs {
-
+        list-style-type: none;
         min-width: 200px;
         min-height: 500px;
     }

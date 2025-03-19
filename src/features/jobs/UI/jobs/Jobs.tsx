@@ -2,6 +2,7 @@
 import styles from './Jobs.module.css'
 import {Job} from "../job/Job.tsx";
 import {useGetJobsQuery} from "../../../../jobApi.ts";
+import {useState} from "react";
 
 
 
@@ -11,18 +12,28 @@ import {useGetJobsQuery} from "../../../../jobApi.ts";
 // 	{id:'3', jobNumber: 3 , customerName:'Darren', customerEmail:"@", customerPhone: 3332222, jobDetails:'some description' }
 // ]
 export const Jobs = () => {
+const[jobNumber,setJobNumber]=useState<number|null|undefined>(undefined)
+	console.log(jobNumber)
+		const{data, refetch}=useGetJobsQuery({jobNumber})
 
-		const{data, refetch}=useGetJobsQuery()
+
 
 	if (!data || data.items.length === 0) {
 		return <div>No jobs found.
-			<button>Search2</button>
+			<button onClick={()=>setJobNumber(0)}>Search2</button>
 		</div>;
 	}
 	return (
 		<div className={styles.jobsContainer}>
 			<div>
-				<button onClick={refetch}>Get new data.</button>
+				<span>Find job</span>
+				<br/>
+				<input type="text"/>
+				<button onClick={()=>setJobNumber(6)}>Search</button>
+			</div>
+			<div>
+				<button onClick={refetch}>All jobs</button>
+				<button onClick={()=>setJobNumber(undefined)}  >Refresh</button>
 			</div>
 			<ul className={styles.jobs}>
 				<Job jobs={data.items}/>
