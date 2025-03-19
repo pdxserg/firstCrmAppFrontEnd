@@ -11,9 +11,6 @@ export const Main = () => {
 			<Link to={Path.Jobs}>
 				<button>Jobs</button>
 			</Link>
-			<Link to={Path.Header}>
-				<button>Header</button>
-			</Link>
 			<Link to={Path.NotFound}>
 				<button>Error</button>
 			</Link>

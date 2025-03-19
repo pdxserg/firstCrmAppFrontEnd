@@ -41,7 +41,7 @@ export const Job = ({jobs}: Props) => {
 					<h3>Name: {el.customerName}</h3>
 					<p>Phone: {el.customerPhone}</p>
 					<p>Email: {el.customerEmail}</p>
-					<p>Description: {el.jobDetails}</p>
+					<div className={styles.jobDescription}>Description: {el.jobDetails}</div>
 					<button onClick={()=>deleteJobHandler(el.id)}>Delete</button>
 				</li>
 

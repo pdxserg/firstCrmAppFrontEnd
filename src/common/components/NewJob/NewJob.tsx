@@ -11,11 +11,11 @@ import {EmailInput} from "../EmailInput/EmailInput.tsx";
 // 	jobDetails: string
 export const NewJob = () => {
 
-	 const [customerName, setCustomerName] = useState<string>("")
-	 const [customerEmail, setCustomerEmail] = useState<string>("")
+	 const [customerName, setCustomerName] = useState<string>("First Last")
+	 const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	 const [customerPhone, setCustomerPhone] = useState<string>("")
 	 const [jobDetails, setJobDetails] = useState<string>("")
-
+console.log(!jobDetails)
 
 // const customerName ="Brad Spring"
 // 	const customerEmail= "johnspring@gmail.com"
@@ -25,10 +25,10 @@ export const NewJob = () => {
 	const [createJob] = useCreateJobMutation()
 
 const createJobHandler=()=>{
-	createJob({customerName, customerEmail, customerPhone, jobDetails})
-		.unwrap()
-		.then(()=>{alert("Success")})
-		.catch(()=>{alert("Bud request")})
+			 createJob({customerName, customerEmail, customerPhone, jobDetails})
+				 .unwrap()
+				 .then(()=>{alert("Success")})
+				 .catch(()=>{alert("Bud request")})
 }
 
 const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{

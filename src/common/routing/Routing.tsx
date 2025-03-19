@@ -16,14 +16,17 @@ export const Path = {
 
 export const Routing = () => {
 	return (
-		<Routes>
-			<Route path={Path.Main} element={<Main />} />
-			<Route path={Path.Jobs} element={<Jobs />} />
-			<Route path={Path.NotFound} element={<Page404 />} />
-			<Route path={Path.Header} element={<Header />} />
-			<Route path={Path.NewJob} element={<NewJob />} />
+		<>
+			<Header/>
+			<Routes>
+				<Route path={Path.Main} element={<Main />} />
+				<Route path={Path.Jobs} element={<Jobs />} />
+				<Route path={Path.NewJob} element={<NewJob />} />
+				<Route path={Path.NotFound} element={<Page404 />} />
 
-			{/*<Route path={Path.Login} element={<Login />} />*/}
-		</Routes>
+				{/*<Route path={Path.Login} element={<Login />} />*/}
+			</Routes>
+		</>
+
 	)
 }

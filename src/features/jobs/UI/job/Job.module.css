@@ -8,3 +8,12 @@
     transition: background-color 0.3s ease;
     margin: 5px 5px;
 }
+
+ .jobDescription{
+     width: 200px;
+     height: calc(5 * 1.2em);
+     overflow-y: auto; /* Corrected line: Enables vertical scrolling only */
+     border: 1px solid #ccc;
+     padding: 5px;
+     white-space: pre-line;
+ }

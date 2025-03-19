@@ -7,9 +7,9 @@ type Props = {
 export const PhoneInput=({onchange}:Props)=> {
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [isValid, setIsValid] = useState(true);
-
+console.log(phoneNumber)
 	const handleBlur = () => {
-		if(phoneNumber.length !==14){
+		if(phoneNumber.length !==10){
 			setIsValid(false);
 		}
 
@@ -17,8 +17,8 @@ export const PhoneInput=({onchange}:Props)=> {
 
 const handleAccept=(value: string)=>{
 	setIsValid(true);
-	setPhoneNumber(value)
-	onchange(value)
+	setPhoneNumber(value.replace(/\D/g, ''))
+	onchange(value.replace(/\D/g, ''))
 }
 
 	return (
