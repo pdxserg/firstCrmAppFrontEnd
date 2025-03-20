@@ -3,6 +3,7 @@ import {useCreateJobMutation} from "../../../jobApi.ts";
 import {ChangeEvent, useState} from "react";
 import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
+import {JobDescription} from "../../../features/jobs/UI/job/JobDescription.tsx";
 
 
 // customerName: string,
@@ -60,9 +61,12 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 				<br/>
 				<label htmlFor="w3review">Description:</label>
 				<br/>
-				<textarea id="w3review" name="w3review" rows={4} cols={50}
-				          value={jobDetails} onChange={(e) => setJobDetails(e.currentTarget.value)}
-				></textarea>
+				<JobDescription jobDetails={jobDetails}
+				                setJobDetails={(text)=>setJobDetails(text)}
+				/>
+				{/*<textarea id="w3review" name="w3review" rows={4} cols={50}*/}
+				{/*          value={jobDetails} onChange={(e) => setJobDetails(e.currentTarget.value)}*/}
+				{/*></textarea>*/}
 				<br/>
 				<button onClick={createJobHandler}>Add</button>
 			</div>
