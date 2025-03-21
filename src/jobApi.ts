@@ -49,7 +49,17 @@ export const jobsApi = createApi({
 				invalidatesTags: ["Jobs"]
 			}),
 
-			deleteJob: build.mutation<{ message: 'string' }, string>({
+			updateJob: build.mutation<{message: string},{ id:string, jobDetails:string }>({
+				query: ({id, jobDetails}) => {
+					return {
+						method: "PUT",
+						url: `/api/jobs/${id}`,
+						body:{jobDetails}
+					}
+				},
+				invalidatesTags: ["Jobs"]
+			}),
+			deleteJob: build.mutation<{ message: string }, string>({
 				query: (id) => {
 					return {
 						method: "DELETE",
@@ -63,4 +73,4 @@ export const jobsApi = createApi({
 })
 
 // 7
-export const {useDeleteJobMutation, useGetJobsQuery, useCreateJobMutation} = jobsApi
+export const {useDeleteJobMutation, useGetJobsQuery, useCreateJobMutation, useUpdateJobMutation} = jobsApi

@@ -57,16 +57,10 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 				<br/>
 				<EmailInput onchange={onchangeEmailHandler}/>
 				<PhoneInput onchange={onchangePhoneHandler}/>
-
-				<br/>
-				<label htmlFor="w3review">Description:</label>
 				<br/>
 				<JobDescription jobDetails={jobDetails}
-				                setJobDetails={(text)=>setJobDetails(text)}
+				                setJobDetails={(newDescription) => setJobDetails(newDescription)}
 				/>
-				{/*<textarea id="w3review" name="w3review" rows={4} cols={50}*/}
-				{/*          value={jobDetails} onChange={(e) => setJobDetails(e.currentTarget.value)}*/}
-				{/*></textarea>*/}
 				<br/>
 				<button onClick={createJobHandler}>Add</button>
 			</div>

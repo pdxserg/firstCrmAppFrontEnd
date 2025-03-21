@@ -1,6 +1,7 @@
 // @flow
 import styles from './Job.module.css'
-import {useDeleteJobMutation} from "../../../../jobApi.ts";
+import {useDeleteJobMutation, useUpdateJobMutation} from "../../../../jobApi.ts";
+import {EditableSpan} from "../../../../common/components/EditableSpan/EditableSpan.tsx";
 
 export type JobType = {
 	id: string,
@@ -16,6 +17,7 @@ type Props = {
 }
 
 export const Job = ({jobs}: Props) => {
+	const [updateJob]=useUpdateJobMutation()
 	const [deleteTask] = useDeleteJobMutation()
 	// const removeTask = () => {
 	// 	updateEntityStatus("loading")
@@ -29,9 +31,15 @@ export const Job = ({jobs}: Props) => {
 	// 		})
 	// }
 	const deleteJobHandler=(id:string)=>{
-
 		deleteTask( id)
 	}
+	const updateHandler=(id:string,jobDetails:string)=>{
+		// eslint-disable-next-line no-debugger
+		debugger
+		updateJob({id, jobDetails})
+	}
+
+
 	return (
 		<>
 
@@ -41,7 +49,11 @@ export const Job = ({jobs}: Props) => {
 					<h3>Name: {el.customerName}</h3>
 					<p>Phone: {el.customerPhone}</p>
 					<p>Email: {el.customerEmail}</p>
-					<div className={styles.jobDescription}>Description: {el.jobDetails}</div>
+					<div className={styles.jobDescription}>
+						<span> Description: </span>
+						<EditableSpan value={el.jobDetails} onChange={(e)=>updateHandler(el.id,e)}/>
+
+					</div>
 					<button onClick={()=>deleteJobHandler(el.id)}>Delete</button>
 				</li>
 

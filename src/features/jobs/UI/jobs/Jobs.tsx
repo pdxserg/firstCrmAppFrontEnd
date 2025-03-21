@@ -2,17 +2,11 @@
 import styles from './Jobs.module.css'
 import {Job} from "../job/Job.tsx";
 import {useGetJobsQuery} from "../../../../jobApi.ts";
-import {useState} from "react";
+import { useState} from "react";
 
-
-
-// const jobs: JobType[]=[
-// 	{id:'1', jobNumber: 1 , customerName:'Maik', customerEmail:"@", customerPhone: 3332222, jobDetails:'some description' },
-// 	{id:'2', jobNumber: 2 , customerName:'Bob', customerEmail:"@", customerPhone: 3332222, jobDetails:'some description' },
-// 	{id:'3', jobNumber: 3 , customerName:'Darren', customerEmail:"@", customerPhone: 3332222, jobDetails:'some description' }
-// ]
 export const Jobs = () => {
 const[jobNumber,setJobNumber]=useState<number|null|undefined>(undefined)
+	const [searchParams, setSearchParams]=useState<string>("")
 	console.log(jobNumber)
 		const{data, refetch}=useGetJobsQuery({jobNumber})
 
@@ -28,8 +22,8 @@ const[jobNumber,setJobNumber]=useState<number|null|undefined>(undefined)
 			<div>
 				<span>Find job</span>
 				<br/>
-				<input type="text"/>
-				<button onClick={()=>setJobNumber(6)}>Search</button>
+				<input type="text" value={searchParams} onChange={(e)=>setSearchParams(e.currentTarget.value)}/>
+				<button onClick={()=>setJobNumber(+searchParams)}>Search</button>
 			</div>
 			<div>
 				<button onClick={refetch}>All jobs</button>
