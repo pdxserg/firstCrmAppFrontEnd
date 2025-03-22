@@ -34,8 +34,6 @@ export const Job = ({jobs}: Props) => {
 		deleteTask( id)
 	}
 	const updateHandler=(id:string,jobDetails:string)=>{
-		// eslint-disable-next-line no-debugger
-		debugger
 		updateJob({id, jobDetails})
 	}
 
@@ -49,12 +47,11 @@ export const Job = ({jobs}: Props) => {
 					<h3>Name: {el.customerName}</h3>
 					<p>Phone: {el.customerPhone}</p>
 					<p>Email: {el.customerEmail}</p>
+					<p> Description: </p>
 					<div className={styles.jobDescription}>
-						<span> Description: </span>
-						<EditableSpan value={el.jobDetails} onChange={(e)=>updateHandler(el.id,e)}/>
-
+						<EditableSpan value={el.jobDetails} onChange={(e) => updateHandler(el.id, e)}/>
 					</div>
-					<button onClick={()=>deleteJobHandler(el.id)}>Delete</button>
+					<button onClick={() => deleteJobHandler(el.id)}>Delete</button>
 				</li>
 
 			})}
