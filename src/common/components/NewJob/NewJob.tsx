@@ -14,8 +14,8 @@ export const NewJob = () => {
 
 	 const [customerName, setCustomerName] = useState<string>("First Last")
 	 const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
-	 const [customerPhone, setCustomerPhone] = useState<string>("")
-	 const [jobDetails, setJobDetails] = useState<string>("")
+	 const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
+	 const [jobDetails, setJobDetails] = useState<string>("some text some text some text")
 console.log(!jobDetails)
 
 // const customerName ="Brad Spring"

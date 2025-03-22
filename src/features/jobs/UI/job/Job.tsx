@@ -19,22 +19,20 @@ type Props = {
 export const Job = ({jobs}: Props) => {
 	const [updateJob]=useUpdateJobMutation()
 	const [deleteTask] = useDeleteJobMutation()
-	// const removeTask = () => {
-	// 	updateEntityStatus("loading")
-	// 	deleteTask({ taskId: task.id, todolistId: todo.id })
-	// 		.unwrap()
-	// 		.then(() => {
-	// 			updateEntityStatus("succeeded")
-	// 		})
-	// 		.catch(() => {
-	// 			updateEntityStatus("failed")
-	// 		})
-	// }
+
 	const deleteJobHandler=(id:string)=>{
+		// 	updateEntityStatus("loading")
 		deleteTask( id)
+			.unwrap()
+			.then(()=>{alert("Success")})
+			.catch(()=>{alert("Bud request")})
 	}
 	const updateHandler=(id:string,jobDetails:string)=>{
+		// 	updateEntityStatus("loading")
 		updateJob({id, jobDetails})
+			.unwrap()
+			.then(()=>{alert("Success")})
+			.catch(()=>{alert("Bud request")})
 	}
 
 
