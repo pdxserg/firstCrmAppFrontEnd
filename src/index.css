@@ -1,0 +1,125 @@
+/*html {*/
+/*  box-sizing: border-box;*/
+/*}*/
+
+/**,*/
+/**::before,*/
+/**::after {*/
+/*  box-sizing: inherit;*/
+/*}*/
+
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    /*line-height: 1.5;*/
+    font-weight: 400;
+
+
+    --primary-color: #007bff; /* Blue */
+    --secondary-color: #6c757d; /* Gray */
+    --background-color: #f8f9fa; /* Light Gray */
+}
+
+
+body {
+    border: 1px solid #1eca12;
+    font-family: sans-serif;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    margin: 0; /* Remove default body margins */
+    padding: 0; /* Remove default body padding */
+    width: 100%;
+
+}
+
+/* Header Styles */
+header {
+    border: 1px solid #ca122e;
+
+    background-color: #a1fffb; /* White background */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav {
+    display: flex;
+    gap: 1rem;
+}
+
+main {
+    margin-bottom: 20px;
+}
+/* Footer Styles */
+footer {
+    width: calc(100% - 2px); /* 100% - (body border * 2) */
+    border: 1px solid #ca122e;
+    background-color: #f0f0f0;
+    /*padding: 1rem 2rem;*/
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+}
+
+footer span {
+    border: 1px solid #ca122e;
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.2em 0.6em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    /*background-color: #1a1a1a;*/
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+button:hover {
+    border-color: #646cff;
+}
+
+button:active {
+    background-color: #c1fd92;
+}
+
+
+textArea {
+    width: calc(100% - 22px); /* 100% - (body border * 2) - 2px for good measure*/
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+@media (min-width: 600px) {
+    textArea {
+        max-width: 300px;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 599px) {
+    textArea {
+        margin: 10px;
+    }
+}
