@@ -3,7 +3,7 @@ import { useState} from "react";
 
 type Props = {
 	value: string
-	onChange: (newDescription: string) => void
+	onChange: (newValue: string) => void
 }
 
 export const EditableSpan = ({ value, onChange }: Props) => {
@@ -36,15 +36,6 @@ export const EditableSpan = ({ value, onChange }: Props) => {
 						autoFocus
 					></textarea>
 				</>
-
-				// <TextField
-				// 	variant={"outlined"}
-				// 	value={title}
-				// 	size={"small"}
-				// 	onChange={changeTitleHandler}
-				// 	onBlur={deactivateEditModeHandler}
-				// 	autoFocus
-				// />
 			) : (
 				<span onDoubleClick={activateEditModeHandler}>{value}</span>
 			)}

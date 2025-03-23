@@ -12,7 +12,7 @@ import {JobDescription} from "../../../features/jobs/UI/job/JobDescription.tsx";
 // 	jobDetails: string
 export const NewJob = () => {
 
-	 const [customerName, setCustomerName] = useState<string>("First Last")
+	 const [customerName, setCustomerName] = useState<string>("John Cooper")
 	 const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	 const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
 	 const [jobDetails, setJobDetails] = useState<string>("some text some text some text")

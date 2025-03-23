@@ -49,12 +49,17 @@ export const jobsApi = createApi({
 				invalidatesTags: ["Jobs"]
 			}),
 
-			updateJob: build.mutation<{message: string},{ id:string, jobDetails:string }>({
-				query: ({id, jobDetails}) => {
+			updateJob: build.mutation<{message: string},{ id:string,
+				jobDetails?:string,
+				customerName?: string,
+				customerEmail?: string,
+				customerPhone?: string,
+			}>({
+				query: ({id, jobDetails,customerName,customerEmail,customerPhone}) => {
 					return {
 						method: "PUT",
 						url: `/api/jobs/${id}`,
-						body:{jobDetails}
+						body:{jobDetails,customerName,customerEmail,customerPhone}
 					}
 				},
 				invalidatesTags: ["Jobs"]
