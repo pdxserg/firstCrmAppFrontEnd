@@ -1,7 +1,7 @@
 
 import styles from './Page404.module.css'
-import {Path} from "../../routing/Routing.tsx";
 import {Link} from "react-router-dom";
+import {Path} from "../../../app/App.tsx";
 
 
 export const Page404 = () => {

@@ -3,8 +3,8 @@ import styles from './Jobs.module.css'
 import {Job} from "../job/Job.tsx";
 import {useGetJobsQuery} from "../../../../jobApi.ts";
 import { useState} from "react";
-import {Path} from "../../../../common/routing/Routing.tsx";
 import {Link} from "react-router-dom";
+import {Path} from "../../../../app/App.tsx";
 
 export const Jobs = () => {
 const[jobNumber,setJobNumber]=useState<number|null|undefined>(undefined)

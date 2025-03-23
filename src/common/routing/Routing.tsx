@@ -1,19 +1,11 @@
 
-import {Header} from "../components/Header.tsx";
+import {Home} from "../components/Home.tsx";
 
-export const Path = {
-	Main: "/",
-	Jobs: "/jobs",
-	NotFound: "/*",
-	Header: "/header",
-	NewJob: "/jobs/new",
-	// Login: "/login",
-} as const
 
 export const Routing = () => {
 	return (
 		<>
-			<Header/>
+			<Home/>
 
 		</>
 

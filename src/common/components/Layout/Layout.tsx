@@ -1,6 +1,6 @@
 import {Link, Outlet} from "react-router-dom";
-import {Path} from "../../routing/Routing.tsx";
 import style from "./Layout.module.css"
+import {Path} from "../../../app/App.tsx";
 
 
 export const Layout = () => {
@@ -8,7 +8,7 @@ export const Layout = () => {
 		<>
 			<header className={style.header}>
 				<nav>
-					<Link to={Path.NotFound}><button>Home</button></Link>
+					<Link to={Path.Header}><button>Home</button></Link>
 					<Link to={Path.Jobs}><button>Jobs</button></Link>
 					<Link to={Path.NewJob}><button>Create</button></Link>
 				</nav>
