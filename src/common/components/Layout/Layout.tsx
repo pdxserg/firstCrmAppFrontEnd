@@ -1,0 +1,23 @@
+import {Link, Outlet} from "react-router-dom";
+import {Path} from "../../routing/Routing.tsx";
+import style from "./Layout.module.css"
+
+
+export const Layout = () => {
+	return (
+		<>
+			<header className={style.header}>
+				<nav>
+					<Link to={Path.NotFound}><button>Home</button></Link>
+					<Link to={Path.Jobs}><button>Jobs</button></Link>
+					<Link to={Path.NewJob}><button>Create</button></Link>
+				</nav>
+			</header>
+			<main>
+				<Outlet/>
+			</main>
+			<footer className={style.footer}><span>&copy; 2025 Your Company</span></footer>
+
+		</>
+	);
+};

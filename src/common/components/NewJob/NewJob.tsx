@@ -3,7 +3,7 @@ import {useCreateJobMutation} from "../../../jobApi.ts";
 import {ChangeEvent, useState} from "react";
 import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
-import {JobDescription} from "../../../features/jobs/UI/job/JobDescription.tsx";
+import {JobDescription} from "../JobDescription/JobDescription.tsx";
 import {toast} from "react-toastify";
 
 
