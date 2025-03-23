@@ -31,7 +31,7 @@ body {
     border: 1px solid #1eca12;
     font-family: sans-serif;
     min-height: 100vh;
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     margin: 0; /* Remove default body margins */
     padding: 0; /* Remove default body padding */
     width: 100%;

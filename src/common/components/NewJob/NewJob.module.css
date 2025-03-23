@@ -3,7 +3,7 @@
     flex-direction: column; /* Располагаем элементы в колонку */
     align-items: center; /* Центрируем горизонтально */
     /* height: 100vh; */ /* Задаем высоту контейнера, если нужно */
-    border: 1px solid black;
+    border: 1px solid #df0707;
     padding-left: 5px;
 }
 
