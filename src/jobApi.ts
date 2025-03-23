@@ -56,6 +56,7 @@ export const jobsApi = createApi({
 				customerPhone?: string,
 			}>({
 				query: ({id, jobDetails,customerName,customerEmail,customerPhone}) => {
+
 					return {
 						method: "PUT",
 						url: `/api/jobs/${id}`,

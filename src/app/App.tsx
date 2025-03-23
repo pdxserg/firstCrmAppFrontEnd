@@ -2,12 +2,14 @@ import './App.module.css'
 import {Path, Routing} from "../common/routing/Routing.tsx";
 import {Link} from "react-router-dom";
 import styles from './App.module.css'
+import {ToastContainer} from "react-toastify";
 
 
 function App() {
 
 	return (
 		<>
+			<ToastContainer/>
 			{/*<div>Create new</div>*/}
 			{/*<div>Jobs</div>*/}
 			{/*<div>Customers</div>*/}

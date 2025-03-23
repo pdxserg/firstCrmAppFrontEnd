@@ -4,32 +4,26 @@ import {ChangeEvent, useState} from "react";
 import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
 import {JobDescription} from "../../../features/jobs/UI/job/JobDescription.tsx";
+import {toast} from "react-toastify";
 
 
-// customerName: string,
-// 	customerEmail: string,
-// 	customerPhone: number,
-// 	jobDetails: string
 export const NewJob = () => {
 
 	 const [customerName, setCustomerName] = useState<string>("John Cooper")
 	 const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	 const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
 	 const [jobDetails, setJobDetails] = useState<string>("some text some text some text")
-console.log(!jobDetails)
 
-// const customerName ="Brad Spring"
-// 	const customerEmail= "johnspring@gmail.com"
-// 	const customerPhone = 3661515
-// 	const jobDetails= "Lorem ipsum"
-
+	const showToastMessage = () => {
+		toast.success("Success!");
+	};
 	const [createJob] = useCreateJobMutation()
 
 const createJobHandler=()=>{
 			 createJob({customerName, customerEmail, customerPhone, jobDetails})
 				 .unwrap()
-				 .then(()=>{alert("Success")})
-				 .catch(()=>{alert("Bud request")})
+				 .then(()=>toast.success("Success!"))
+				 .catch((err)=>toast.error(err))
 }
 
 const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
@@ -47,6 +41,10 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 		<div className={styles.container}>
 
 			<div className={styles.centerTopElement}>
+				<div>
+					<button onClick={showToastMessage}>Notify</button>
+
+				</div>
 				<h2>Create new job</h2>
 
 				<label htmlFor="name">Name:</label>

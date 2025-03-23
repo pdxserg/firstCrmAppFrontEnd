@@ -70,3 +70,6 @@ button:active {
     background-color: #e4ffce;
   }
 }
+.toast{
+  opacity: 0.7
+}
