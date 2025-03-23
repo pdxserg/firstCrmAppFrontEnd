@@ -3,8 +3,7 @@ import styles from './Jobs.module.css'
 import {Job} from "../job/Job.tsx";
 import {useGetJobsQuery} from "../../../../jobApi.ts";
 import { useState} from "react";
-import {Link} from "react-router-dom";
-import {Path} from "../../../../app/App.tsx";
+
 
 export const Jobs = () => {
 const[jobNumber,setJobNumber]=useState<number|null|undefined>(undefined)
@@ -16,14 +15,16 @@ const[jobNumber,setJobNumber]=useState<number|null|undefined>(undefined)
 	const findJobHandler=()=>{
 	setJobNumber(+searchParams)
 	}
-
+	const refetchHandler =()=>{
+	setJobNumber(undefined)
+		setSearchParams("")
+		refetch()
+	}
 
 
 	if (!data || data.items.length === 0) {
 		return <div>No jobs found.
-			<Link to={Path.NewJob}>
-				<button>New Job</button>
-			</Link>
+			<button onClick={refetchHandler}>All jobs</button>
 		</div>;
 	}
 	return (
