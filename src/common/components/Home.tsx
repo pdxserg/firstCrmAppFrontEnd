@@ -3,7 +3,7 @@
 
 export const Home = ( ) => {
 
-	const destination = "16001 NE 47th St, Vancouver, WA 98682";
+	const destination = "16001 NE 47th St  WA 98682";
 
 
 		const encodedDestination = encodeURIComponent(destination);

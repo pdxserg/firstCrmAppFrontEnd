@@ -5,6 +5,7 @@ import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
 import {JobDescription} from "../JobDescription/JobDescription.tsx";
 import {toast} from "react-toastify";
+import {AddressInput} from "../AddressInput/AddressInput.tsx";
 
 
 export const NewJob = () => {
@@ -53,8 +54,10 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 				       value={customerName} onChange={onchangeHandler}
 				/>
 				<br/>
-				<EmailInput onchange={onchangeEmailHandler}/>
 				<PhoneInput onchange={onchangePhoneHandler}/>
+				<br/>
+				<AddressInput/>
+				<EmailInput onchange={onchangeEmailHandler}/>
 				<br/>
 				<JobDescription jobDetails={jobDetails}
 				                setJobDetails={(newDescription) => setJobDetails(newDescription)}

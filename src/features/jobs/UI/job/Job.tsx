@@ -91,9 +91,10 @@ export const Job = ({jobs}: Props) => {
 					<div className={styles.jobDescription}>
 						<EditableSpan value={el.jobDetails} onChange={(jobDetails) => updateHandler(el.id,  undefined, undefined,undefined, jobDetails)}/>
 					</div>
-					<button onClick={() => setIsModalOpen(true)}>Delete</button>
-					<ModalRadix open={isModalOpen} onClose={()=>setIsModalOpen(false)} title={'Delete Post'} description={"Are you sure you want to delete this post?"}>
 
+					<button onClick={() => setIsModalOpen(true)}>Delete</button>
+
+					<ModalRadix open={isModalOpen} onClose={()=>setIsModalOpen(false)} title={'Delete Post'} description={"Are you sure you want to delete this post?"}>
 						<div>
 							{/*Будем использовать обычные кнопки*/}
 							<button onClick={()=>deleteJobHandler(el.id)}>YES</button>
