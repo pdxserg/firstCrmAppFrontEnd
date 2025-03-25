@@ -10,7 +10,6 @@ type Response = {
 export const jobsApi = createApi({
 	reducerPath: 'jobsApi',
 	baseQuery: fetchBaseQuery({
-		// baseUrl: process.env.VITE_API_URL,
 		baseUrl: import.meta.env.VITE_API_URL,
 		// prepareHeaders: headers => {
 		// 	headers.set('API-KEY', `${process.env.REACT_APP_API_KEY}`)
@@ -20,7 +19,7 @@ export const jobsApi = createApi({
 	tagTypes: ["Jobs"],
 	endpoints: build => {
 		return {
-			getJobs: build.query<Response, { jobNumber:number|null|undefined }>({
+			getJobs: build.query<Response, { jobNumber:string|null|undefined }>({
 				query: ({jobNumber}) => {
 					return {
 						url: '/api/jobs',

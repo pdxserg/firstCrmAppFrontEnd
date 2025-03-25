@@ -17,7 +17,7 @@
 
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    /*line-height: 1.5;*/
+    line-height: 1.5;
     font-weight: 400;
 
 
@@ -122,4 +122,10 @@ textArea {
     textArea {
         margin: 10px;
     }
+}
+input {
+    font-size: 16px; /* Adjust font size */
+    padding: 8px 12px; /* Adjust padding */
+    height: 40px; /* Adjust height */
+    /* Add other styles as needed */
 }

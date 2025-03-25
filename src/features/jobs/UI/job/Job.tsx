@@ -4,6 +4,9 @@ import {useDeleteJobMutation, useUpdateJobMutation} from "../../../../jobApi.ts"
 import {EditableSpan} from "../../../../common/components/EditableSpan/EditableSpan.tsx";
 import {toast} from "react-toastify";
 
+import {ModalRadix} from "../../../../common/components/ModalRadix/ModalRadix.tsx";
+import {useState} from "react";
+
 export type JobType = {
 	id: string,
 	jobNumber: number
@@ -20,21 +23,28 @@ type Props = {
 export const Job = ({jobs}: Props) => {
 	const [updateJob] = useUpdateJobMutation()
 	const [deleteTask] = useDeleteJobMutation()
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const deleteJobHandler = (id: string) => {
+
 		// 	updateEntityStatus("loading")
-		deleteTask(id)
-			.unwrap()
-			.then((res) => {
-				toast.success(res.message)
-			})
-			.catch((error) => { // Type assertion
-				if (error && error.data && error.data.error) {
-					toast.error(error.data.error);
-				} else {
-					toast.error("An unexpected error occurred.");
-				}
-			});
+
+		setIsModalOpen(false)
+			deleteTask(id)
+				.unwrap()
+				.then((res) => {
+					toast.success(res.message)
+				})
+				.catch((error) => { // Type assertion
+					if (error && error.data && error.data.error) {
+						toast.error(error.data.error);
+					} else {
+						toast.error("An unexpected error occurred.");
+					}
+				});
+
+
+
 	}
 	const updateHandler = (id: string,
 	                       customerName?: string,
@@ -81,8 +91,15 @@ export const Job = ({jobs}: Props) => {
 					<div className={styles.jobDescription}>
 						<EditableSpan value={el.jobDetails} onChange={(jobDetails) => updateHandler(el.id,  undefined, undefined,undefined, jobDetails)}/>
 					</div>
+					<button onClick={() => setIsModalOpen(true)}>Delete</button>
+					<ModalRadix open={isModalOpen} onClose={()=>setIsModalOpen(false)} title={'Delete Post'} description={"Are you sure you want to delete this post?"}>
 
-					<button onClick={() => deleteJobHandler(el.id)}>Delete</button>
+						<div>
+							{/*Будем использовать обычные кнопки*/}
+							<button onClick={()=>deleteJobHandler(el.id)}>YES</button>
+							<button onClick={()=>setIsModalOpen(false)}>NO</button>
+						</div>
+					</ModalRadix>
 				</li>
 
 			})}
