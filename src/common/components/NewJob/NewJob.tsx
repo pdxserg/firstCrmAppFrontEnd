@@ -5,7 +5,7 @@ import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
 import {JobDescription} from "../JobDescription/JobDescription.tsx";
 import {toast} from "react-toastify";
-import {AddressInput} from "../AddressInput/AddressInput.tsx";
+import {AddressInput, AddressType} from "../AddressInput/AddressInput.tsx";
 
 
 export const NewJob = () => {
@@ -14,17 +14,21 @@ export const NewJob = () => {
 	 const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	 const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
 	 const [jobDetails, setJobDetails] = useState<string>("some text some text some text")
+	const [newAddress, setNewAddress]=useState<AddressType|undefined|null>(null)
 
-	const showToastMessage = () => {
-		toast.success("Success!");
-	};
 	const [createJob] = useCreateJobMutation()
 
 const createJobHandler=()=>{
-			 createJob({customerName, customerEmail, customerPhone, jobDetails})
+			 createJob({customerName, customerEmail, customerPhone, jobDetails, newAddress})
 				 .unwrap()
 				 .then(()=>toast.success("Success!"))
-				 .catch((err)=>toast.error(err))
+				 .catch((error) => { // Type assertion
+					 if (error && error.data && error.data.error) {
+						 toast.error(error.data.error);
+					 } else {
+						 toast.error("An unexpected error occurred.");
+					 }
+				 });
 }
 
 const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
@@ -37,15 +41,14 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 	const onchangePhoneHandler=(phoneNumber:string)=>{
 		setCustomerPhone(phoneNumber)
 	}
+	const onchangeAddress=(newAddress:AddressType|undefined|null)=>{
+		setNewAddress(newAddress)
+	}
 
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.centerTopElement}>
-				<div>
-					<button onClick={showToastMessage}>Notify</button>
-
-				</div>
 				<h2>Create new job</h2>
 
 				<label htmlFor="name">Name:</label>
@@ -56,7 +59,7 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 				<br/>
 				<PhoneInput onchange={onchangePhoneHandler}/>
 				<br/>
-				<AddressInput/>
+				<AddressInput onchangeAddress={onchangeAddress}/>
 				<EmailInput onchange={onchangeEmailHandler}/>
 				<br/>
 				<JobDescription jobDetails={jobDetails}

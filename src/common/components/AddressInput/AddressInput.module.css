@@ -1,0 +1,12 @@
+.buttonRed{
+	background-color: red;
+}
+.buttonGreen{
+	background-color: green;
+}
+.inputBorderRed{
+	border: 1px solid red;
+}
+.inputBorderGreen{
+	border: 1px solid green;
+}

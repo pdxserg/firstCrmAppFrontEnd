@@ -1,13 +1,31 @@
 
-
+import  s from "./AddressInput.module.css"
 	import {ChangeEvent, useState} from "react";
 
-export const  AddressInput=()=>{
+export type AddressType={
+	houseStreet:string
+	suitApt:string
+	city:string
+	state:string
+	zip:string
+}
+
+type Props={
+	onchangeAddress:(newAddress:AddressType| undefined)=>void
+}
+export const  AddressInput=({onchangeAddress}:Props)=>{
 		const [houseStreet, setHouseStreet] = useState('');
 		const [suitApt, setSuitApt] = useState('');
 		const [city, setCity] = useState('');
 		const [state, setState] = useState('');
 		const [zip, setZip] = useState('');
+
+		// const [isFull,setIsFull]=useState(false)
+	const isFull=houseStreet && city && state && zip
+
+		const newAddress:AddressType = {houseStreet, city, zip, suitApt, state}
+	console.log(newAddress)
+
 
 		const handleHouseStreetChange = (e:ChangeEvent<HTMLInputElement>) => {
 			setHouseStreet(e.target.value);
@@ -28,6 +46,8 @@ export const  AddressInput=()=>{
 		const handleZipChange = (e:ChangeEvent<HTMLInputElement>) => {
 			setZip(e.target.value);
 		};
+		const checkZip= zip.length===5 && zip[0]==="9"
+	console.log("zip",checkZip)
 
 		return (
 			<div>
@@ -38,6 +58,7 @@ export const  AddressInput=()=>{
 						id="houseStreet"
 						value={houseStreet}
 						onChange={handleHouseStreetChange}
+						className={houseStreet? s.inputBorderGreen:s.inputBorderRed}
 					/>
 				</div>
 
@@ -48,6 +69,7 @@ export const  AddressInput=()=>{
 						id="suitApt"
 						value={suitApt}
 						onChange={handleSuitAptChange}
+
 					/>
 				</div>
 
@@ -58,11 +80,12 @@ export const  AddressInput=()=>{
 						id="city"
 						value={city}
 						onChange={handleCityChange}
+						className={city? s.inputBorderGreen:s.inputBorderRed}
 					/>
 				</div>
 
 
-					<div>
+					<div className={state? s.inputBorderGreen:s.inputBorderRed}>
 						<label>State:</label>
 
 							<label>
@@ -72,6 +95,7 @@ export const  AddressInput=()=>{
 									value="WA"
 									checked={state === 'WA'}
 									onChange={handleStateChange}
+
 								/>
 								WA,
 							</label>
@@ -93,11 +117,19 @@ export const  AddressInput=()=>{
 					<label htmlFor="zip">Zip:</label>
 					<input
 						type="text"
+						minLength={5}
+						maxLength={5}
 						id="zip"
 						value={zip}
 						onChange={handleZipChange}
+						className={!checkZip? s.inputBorderRed: s.inputBorderGreen}
 					/>
+					{!checkZip && <p style={{color: "red"}}>wrong zip code</p>}
 				</div>
+				<button onClick={()=>onchangeAddress(newAddress)}
+				        disabled={!isFull}
+				className={isFull? s.buttonGreen:s.buttonRed}
+				>save</button>
 			</div>
 		);
 }

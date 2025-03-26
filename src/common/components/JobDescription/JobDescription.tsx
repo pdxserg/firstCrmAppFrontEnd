@@ -13,7 +13,8 @@ export const JobDescription = ({jobDetails, setJobDetails}: Props) => {
 			          name="w3review"
 			          rows={4} cols={50}
 			          className={styles.textArea}
-			          value={jobDetails} onChange={(e) => setJobDetails(e.currentTarget.value)}
+			          value={jobDetails}
+			          onChange={(e) => setJobDetails(e.currentTarget.value)}
 			></textarea>
 		</>
 	)
