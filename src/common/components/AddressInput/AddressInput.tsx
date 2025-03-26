@@ -24,7 +24,6 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 	const isFull=houseStreet && city && state && zip
 
 		const newAddress:AddressType = {houseStreet, city, zip, suitApt, state}
-	console.log(newAddress)
 
 
 		const handleHouseStreetChange = (e:ChangeEvent<HTMLInputElement>) => {

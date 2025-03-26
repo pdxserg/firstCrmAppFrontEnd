@@ -6,6 +6,8 @@ import {toast} from "react-toastify";
 
 import {ModalRadix} from "../../../../common/components/ModalRadix/ModalRadix.tsx";
 import {useState} from "react";
+import {AddressType} from "../../../../common/components/AddressInput/AddressInput.tsx";
+import {MapNavigation} from "../../../../common/components/MapNavigation/MapNavigation.tsx";
 
 export type JobType = {
 	id: string,
@@ -14,6 +16,7 @@ export type JobType = {
 	customerEmail: string
 	customerPhone: string
 	jobDetails: string
+	address:AddressType
 
 };
 type Props = {
@@ -24,6 +27,8 @@ export const Job = ({jobs}: Props) => {
 	const [updateJob] = useUpdateJobMutation()
 	const [deleteTask] = useDeleteJobMutation()
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
 	const deleteJobHandler = (id: string) => {
 
@@ -74,6 +79,10 @@ export const Job = ({jobs}: Props) => {
 			{jobs!.map(el => {
 				return <li key={el.id} className={styles.job}>
 					<h2>Job # {el.jobNumber}</h2>
+
+					<p>Address:</p>
+
+					<MapNavigation address={el.address}/>
 					<p>Name:
 						<EditableSpan value={el.customerName}
 						              onChange={(customerName) => updateHandler(el.id, customerName)}/>
