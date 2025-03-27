@@ -8,9 +8,9 @@ address:AddressType
 export const MapNavigation = ({address}: Props) => {
 	console.log(address)
 
-	 const destination = "16001 NE 47th St  WA 98682";
+	 // const destination = "16001 NE 47th St  WA 98682";
 	// const destination = address.houseStreet +","+address.city+","+address.zip }
-	// const destination =`${address.houseStreet}, ${address.city}, ${address.zip}`
+	const destination =`${address.houseStreet} ${address.zip}`
 	// const destination = address.houseStreet +","+address.city+","+address.zip
 
 
@@ -21,6 +21,7 @@ const encodedDestination = encodeURIComponent(destination);
 	return (
 		<div>
 			<p>{destination}</p>
+			<p>suit</p>
 			<div style={{display: "flex", gap: "10px"}}>
 
 

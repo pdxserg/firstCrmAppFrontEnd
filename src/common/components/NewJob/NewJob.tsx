@@ -14,12 +14,12 @@ export const NewJob = () => {
 	 const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	 const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
 	 const [jobDetails, setJobDetails] = useState<string>("some text some text some text")
-	const [newAddress, setNewAddress]=useState<AddressType|undefined|null>(null)
+	const [address, setAddress]=useState<AddressType|undefined|null>(null)
 
 	const [createJob] = useCreateJobMutation()
 
 const createJobHandler=()=>{
-			 createJob({customerName, customerEmail, customerPhone, jobDetails, newAddress})
+			 createJob({customerName, customerEmail, customerPhone, jobDetails,address})
 				 .unwrap()
 				 .then(()=>toast.success("Success!"))
 				 .catch((error) => { // Type assertion
@@ -42,7 +42,7 @@ const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 		setCustomerPhone(phoneNumber)
 	}
 	const onchangeAddress=(newAddress:AddressType|undefined|null)=>{
-		setNewAddress(newAddress)
+		setAddress(newAddress)
 	}
 
 	return (

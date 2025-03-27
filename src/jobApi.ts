@@ -37,14 +37,14 @@ export const jobsApi = createApi({
 				customerEmail: string,
 				customerPhone: string,
 				jobDetails: string
-				newAddress: AddressType |undefined|null
+				address: AddressType |undefined|null
 			}>({
-				query: ({customerName, customerEmail, customerPhone, jobDetails,newAddress}) => {
+				query: ({customerName, customerEmail, customerPhone, jobDetails,address}) => {
 
 					return {
 						method: "POST",
 						url: `/api/jobs`,
-						body: {customerName, customerEmail, customerPhone, jobDetails,newAddress}
+						body: {customerName, customerEmail, customerPhone, jobDetails,address}
 					}
 				},
 				invalidatesTags: ["Jobs"]
