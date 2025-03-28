@@ -1,6 +1,6 @@
 // @flow
 import styles from './Job.module.css'
-import {useDeleteJobMutation, useUpdateJobMutation} from "../../../../jobApi.ts";
+import {useDeleteJobMutation, useUpdateJobMutation} from "../../api/jobApi.ts";
 import {EditableSpan} from "../../../../common/components/EditableSpan/EditableSpan.tsx";
 import {toast} from "react-toastify";
 

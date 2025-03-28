@@ -1,5 +1,5 @@
 import styles from './NewJob.module.css'
-import {useCreateJobMutation} from "../../../jobApi.ts";
+import {useCreateJobMutation} from "../../../features/jobs/api/jobApi.ts";
 import {ChangeEvent, useState} from "react";
 import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";

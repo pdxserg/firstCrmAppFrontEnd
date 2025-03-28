@@ -3,7 +3,7 @@ import { ThunkDispatch } from "redux-thunk"
 
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import {jobsApi} from "../jobApi.ts";
+import {jobsApi} from "../features/jobs/api/jobApi.ts";
 
 
 

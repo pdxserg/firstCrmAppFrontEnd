@@ -1,7 +1,7 @@
 // @flow
 import styles from './Jobs.module.css'
 import {Job} from "../job/Job.tsx";
-import {useGetJobsQuery} from "../../../../jobApi.ts";
+import {useGetJobsQuery} from "../../api/jobApi.ts";
 import { useState} from "react";
 
 

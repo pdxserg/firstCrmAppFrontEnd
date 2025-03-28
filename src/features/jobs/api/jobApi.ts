@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {JobType} from "./features/jobs/UI/job/Job.tsx";
-import {AddressType} from "./common/components/AddressInput/AddressInput.tsx";
+import {JobType} from "../UI/job/Job.tsx";
+import {AddressType} from "../../../common/components/AddressInput/AddressInput.tsx";
 
 type Response = {
 	totalCount: number,

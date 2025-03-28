@@ -21,7 +21,7 @@ const encodedDestination = encodeURIComponent(destination);
 	return (
 		<div>
 			<p>{destination}</p>
-			<p>suit</p>
+			<p>Apt/suit: {address.suitApt}</p>
 			<div style={{display: "flex", gap: "10px"}}>
 
 
