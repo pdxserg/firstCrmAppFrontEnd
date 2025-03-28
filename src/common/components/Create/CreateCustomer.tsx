@@ -1,8 +1,8 @@
-import styles from './NewJob.module.css'
+
  import {ChangeEvent, useState} from "react";
 import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
-
+import styles from "./CreateCustomer.module.css"
 import {toast} from "react-toastify";
 import {AddressInput, AddressType} from "../AddressInput/AddressInput.tsx";
 import {useCreateCustomerMutation} from "../../../features/customers/api/customersApi.ts";

@@ -18,7 +18,7 @@ export const Create = ( ) => {
 				<div>
 					{/*Будем использовать обычные кнопки*/}
 					<Link to={Path.NewJob}><button onClick={() => setIsModalOpen(false)}>Create job</button></Link>
-					<Link to={Path.NewJob}><button onClick={() => setIsModalOpen(false)}>Create customer</button></Link>
+					<Link to={Path.NewCustomer}><button onClick={() => setIsModalOpen(false)}>Create customer</button></Link>
 
 				</div>
 			</ModalRadix>
