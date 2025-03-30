@@ -22,9 +22,19 @@ export const customersApi = createApi({
 	endpoints: build => {
 		return {
 			getCustomers: build.query<Response, void>({
-				query: () => {
+				query: ( ) => {
 					return {
-						url: '/api/customers',
+						url: `/api/customers`,
+						method: 'GET',
+						// params: jobNumber !== undefined ? { jobNumber } : {},
+					}
+				},
+				providesTags: ["Customers"]
+			}),
+			getCustomersById: build.query<Response, { id: string }>({
+				query: ({id}) => {
+					return {
+						url: `/api/customers/${id}`,
 						method: 'GET',
 						// params: jobNumber !== undefined ? { jobNumber } : {},
 					}
@@ -80,4 +90,4 @@ export const customersApi = createApi({
 })
 
 // 7
-export const {useGetCustomersQuery, useCreateCustomerMutation} = customersApi
+export const {useGetCustomersQuery,  useCreateCustomerMutation} = customersApi
