@@ -61,6 +61,7 @@ export const Home = () => {
 			</div>
 
 			<div>
+				Customer
 				<AutoTypeInput names={names}   onSelect={handleNameSelect}/>
 				{selectedName && <div>
                     <span>Selected: {selectedName}</span>

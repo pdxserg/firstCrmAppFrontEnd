@@ -36,10 +36,14 @@ const AutoTypeInput = ({ names, onSelect }:Props) => {
 	// 	onSelect(name);
 	// 	setShowDropdown(false);
 	// };
-
+const handleClear=()=>{
+	setShow(true)
+	setInputValue("")
+	onSelect("")
+}
 	return (
 		<div>
-			{!show && (<button onClick={()=>setShow(true)}>x</button>)}
+			{!show && (<button onClick={handleClear}>x</button>)}
 			{show && (<input
 				type="text"
 				value={inputValue}
