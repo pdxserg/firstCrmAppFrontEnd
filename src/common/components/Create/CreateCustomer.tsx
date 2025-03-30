@@ -57,7 +57,7 @@ export const CreateCustomer = () => {
 		<div className={styles.container}>
 
 			<div className={styles.centerTopElement}>
-				<h2>Create new job</h2>
+				<h2>Create new customer</h2>
 
 				<label htmlFor="name">Name:</label>
 				<br/>
