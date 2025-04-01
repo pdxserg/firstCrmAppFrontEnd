@@ -19,6 +19,7 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 		const [city, setCity] = useState('');
 		const [state, setState] = useState('');
 		const [zip, setZip] = useState('');
+		const [error, setError] = useState('');
 
 		// const [isFull,setIsFull]=useState(false)
 	const isFull=houseStreet && city && state && zip
@@ -27,15 +28,23 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 
 
 		const handleHouseStreetChange = (e:ChangeEvent<HTMLInputElement>) => {
-			setHouseStreet(e.target.value);
+			setHouseStreet(e.target.value.trim());
 		};
 
 		const handleSuitAptChange = (e:ChangeEvent<HTMLInputElement>) => {
-			setSuitApt(e.target.value);
+			const value=e.target.value
+				setSuitApt(value.trim());
 		};
 
 		const handleCityChange = (e:ChangeEvent<HTMLInputElement>) => {
-			setCity(e.target.value);
+			const value=e.target.value
+			if (value.length > 0) {
+				const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+				setCity(capitalizedValue.trim());
+			} else {
+				setCity(value.trim());
+			}
+
 		};
 
 		const handleStateChange = (e:ChangeEvent<HTMLInputElement>) => {
@@ -43,8 +52,14 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 		};
 
 		const handleZipChange = (e:ChangeEvent<HTMLInputElement>) => {
-			setZip(e.target.value);
+			setZip(e.target.value.trim());
+			setError('')
 		};
+	const handleBlur = () => {
+		if (!/^9\d{4}$/.test(zip)) {//&& zip[0]!=="9"
+			setError("errorMessage");
+		}
+	};
 		const checkZip= zip.length===5 && zip[0]==="9"
 	console.log("zip",checkZip)
 
@@ -121,12 +136,13 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 						id="zip"
 						value={zip}
 						onChange={handleZipChange}
+						onBlur={handleBlur}
 						className={!checkZip? s.inputBorderRed: s.inputBorderGreen}
 					/>
-					{!checkZip && <p style={{color: "red"}}>wrong zip code</p>}
+					{error && <p style={{color: "red"}}>wrong zip code</p>}
 				</div>
 				<button onClick={()=>onchangeAddress(newAddress)}
-				        disabled={!isFull}
+				        disabled={!isFull ||!checkZip }
 				className={isFull? s.buttonGreen:s.buttonRed}
 				>save</button>
 			</div>

@@ -22,7 +22,7 @@ export const CreateCustomer = () => {
 	const [customerName, setCustomerName] = useState<string>("John Cooper")
 	const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
-	const [address, setAddress]=useState<AddressType|undefined|null>(null)
+	const [address, setAddress]=useState<AddressType|undefined>( )
 
 	 const [createCustomer] = useCreateCustomerMutation()
 
@@ -49,7 +49,7 @@ export const CreateCustomer = () => {
 	const onchangePhoneHandler=(phoneNumber:string)=>{
 		setCustomerPhone(phoneNumber)
 	}
-	const onchangeAddress=(newAddress:AddressType|undefined|null)=>{
+	const onchangeAddress=(newAddress:AddressType|undefined )=>{
 		setAddress(newAddress)
 	}
 
@@ -71,7 +71,8 @@ export const CreateCustomer = () => {
 				<EmailInput onchange={onchangeEmailHandler}/>
 				<br/>
 
-				<button onClick={createCustomerHandler}>Add</button>
+				<button disabled={!address} onClick={createCustomerHandler}>Add</button>
+				{!address&&<p>you need save address</p>}
 			</div>
 		</div>
 	)
