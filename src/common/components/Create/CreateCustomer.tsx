@@ -40,7 +40,14 @@ export const CreateCustomer = () => {
 	}
 
 	const onchangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
-		setCustomerName(e.currentTarget.value)
+		const value = e.currentTarget.value
+		setCustomerName(
+			value
+				.split(' ')
+				.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+				.join(' ')
+		);
+
 	}
 
 	const onchangeEmailHandler=(email:string)=>{

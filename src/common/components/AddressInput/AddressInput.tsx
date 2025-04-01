@@ -28,21 +28,25 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 
 
 		const handleHouseStreetChange = (e:ChangeEvent<HTMLInputElement>) => {
-			setHouseStreet(e.target.value.trim());
+			setHouseStreet(e.target.value );
 		};
 
 		const handleSuitAptChange = (e:ChangeEvent<HTMLInputElement>) => {
 			const value=e.target.value
-				setSuitApt(value.trim());
+				setSuitApt(value );
 		};
 
 		const handleCityChange = (e:ChangeEvent<HTMLInputElement>) => {
 			const value=e.target.value
 			if (value.length > 0) {
-				const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
-				setCity(capitalizedValue.trim());
+				const capitalizedValue=
+					value
+					.split(' ')
+					.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+					.join(' ')
+				setCity(capitalizedValue);
 			} else {
-				setCity(value.trim());
+				setCity(value);
 			}
 
 		};
@@ -56,7 +60,7 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 			setError('')
 		};
 	const handleBlur = () => {
-		if (!/^9\d{4}$/.test(zip)) {//&& zip[0]!=="9"
+		if (!/^9\d{4}$/.test(zip)) {// begin from 9, only number, length 5
 			setError("errorMessage");
 		}
 	};
