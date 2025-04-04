@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {CustomerType} from "../Create/CreateCustomer.tsx";
+import {CreateCustomer, CustomerType} from "../Create/CreateCustomer.tsx";
 type  Props= {
 	names: CustomerType[] | undefined;
 	onSelect: (name: string | undefined, id?: string) => void;
@@ -11,6 +11,7 @@ const AutoTypeInput = ({ names, onSelect }:Props) => {
 	const [filteredNames, setFilteredNames] = useState<CustomerType[]|undefined>([]);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const[show,setShow]=useState(true)
+	const [create, setCreate]=useState(false)
 
 	useEffect(() => {
 		if (inputValue.length >= 3 ) {
@@ -41,6 +42,12 @@ const handleClear=()=>{
 	setInputValue("")
 	onSelect("")
 }
+const handleCreateNewCustomer=() => {
+	setCreate(true)
+	setShow(true)
+
+
+}
 	return (
 		<div>
 			{!show && (<button onClick={handleClear}>x</button>)}
@@ -52,9 +59,10 @@ const handleClear=()=>{
 			{showDropdown && (
 				<ul>
 					<li>
-						<button onClick={() => handleSelect(inputValue)}>
+						<button onClick={handleCreateNewCustomer}>
 							Create New: {inputValue}
 						</button>
+						{create && <CreateCustomer/>}
 					</li>
 					{filteredNames?.map((item) => (
 						<li key={item.id}>

@@ -25,7 +25,6 @@ type Props={
 				{children}
 				<Dialog.Close asChild>
 					<button onClick={onClose} className={styles.IconButton} aria-label="Close">
-						{/*<Cross2Icon />*/}
 						X
 					</button>
 				</Dialog.Close>

@@ -26,15 +26,13 @@ type Props = {
 export const Job = ({jobs}: Props) => {
 	const [updateJob] = useUpdateJobMutation()
 	const [deleteTask] = useDeleteJobMutation()
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [jobIdToDelete, setJobIdToDelete] = useState<null | string>(null);
 
 
 
 	const deleteJobHandler = (id: string) => {
-
 		// 	updateEntityStatus("loading")
 
-		setIsModalOpen(false)
 		deleteTask(id)
 			.unwrap()
 			.then((res) => {
@@ -47,9 +45,8 @@ export const Job = ({jobs}: Props) => {
 					toast.error("An unexpected error occurred.");
 				}
 			});
-
-
 	}
+
 	const updateHandler = (id: string,
 	                       customerName?: string,
 	                       customerEmail?: string,
@@ -108,20 +105,31 @@ export const Job = ({jobs}: Props) => {
 						              onChange={(jobDetails) => updateHandler(el.id, undefined, undefined, undefined, jobDetails)}/>
 					</div>
 
-					<button onClick={() => setIsModalOpen(true)}>Delete</button>
+					<button onClick={() => setJobIdToDelete(el.id)}>Delete</button>
 
-					<ModalRadix open={isModalOpen} onClose={() => setIsModalOpen(false)} title={'Delete Post'}
-					            description={"Are you sure you want to delete this post?"}>
-						<div>
-							{/*Будем использовать обычные кнопки*/}
-							<button onClick={() => deleteJobHandler(el.id)}>YES</button>
-							<button onClick={() => setIsModalOpen(false)}>NO</button>
-						</div>
-					</ModalRadix>
+					{/*<ModalRadix open={isModalOpen} onClose={() => setIsModalOpen(false)} title={'Delete Post'}*/}
+					{/*            description={`Are you sure you want to delete this post -${el.customerName}?`}>*/}
+					{/*	<div>*/}
+					{/*		<button onClick={() => deleteJobHandler(el.id)}>YES</button>*/}
+					{/*		<button onClick={() => setIsModalOpen(false)}>NO</button>*/}
+					{/*	</div>*/}
+					{/*</ModalRadix>*/}
 				</li>
 
 			})}
-
+			<ModalRadix open={!!jobIdToDelete} onClose={() => setJobIdToDelete(null)} title={'Delete Post'}
+			            description={`Are you sure you want to delete this post ?`}>
+				<div>
+					<button onClick={() => {
+						if(jobIdToDelete){
+							deleteJobHandler(jobIdToDelete)
+							setJobIdToDelete(null)
+						}
+					}
+					}>YES</button>
+					<button onClick={() => setJobIdToDelete(null)}>NO</button>
+				</div>
+			</ModalRadix>
 		</>
 	);
 };

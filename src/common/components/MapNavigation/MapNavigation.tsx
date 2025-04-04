@@ -6,7 +6,6 @@ type Props = {
 address:AddressType
 };
 export const MapNavigation = ({address}: Props) => {
-	console.log(address)
 
 	 // const destination = "16001 NE 47th St  WA 98682";
 	// const destination = address.houseStreet +","+address.city+","+address.zip }
