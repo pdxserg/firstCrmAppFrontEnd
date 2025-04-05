@@ -15,11 +15,14 @@ export type CustomerType = {
 	address:AddressType
 
 };
+type Props={
+	name:string
+	handleSelect:(customerName:string,id:string)=>void
+}
 
+export const CreateCustomer = ({handleSelect,name}:Props) => {
 
-export const CreateCustomer = () => {
-
-	const [customerName, setCustomerName] = useState<string>("John Cooper")
+	const [customerName, setCustomerName] = useState<string>(name)
 	const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
 	const [address, setAddress]=useState<AddressType|undefined>( )
@@ -29,7 +32,10 @@ export const CreateCustomer = () => {
 	const createCustomerHandler=()=>{
 		createCustomer({customerName, customerEmail, customerPhone, address})
 			.unwrap()
-			.then(()=>toast.success("Success!"))
+			.then((res)=>{
+				handleSelect(res.customerName,res.id)
+				toast.success("Success!")
+			})
 			.catch((error) => { // Type assertion
 				if (error && error.data && error.data.error) {
 					toast.error(error.data.error);

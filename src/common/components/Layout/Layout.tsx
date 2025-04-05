@@ -12,7 +12,7 @@ export const Layout = () => {
 				<nav>
 					<Link to={Path.Header}><button>Home</button></Link>
 					<Link to={Path.Jobs}><button>Jobs</button></Link>
-					<Link to={Path.NewJob}><button>Create</button></Link>
+					<Link to={Path.NewJob}><button>Create Job</button></Link>
 					<Create/>
 				</nav>
 			</header>

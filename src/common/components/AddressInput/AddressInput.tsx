@@ -65,7 +65,7 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 		}
 	};
 		const checkZip= zip.length===5 && zip[0]==="9"
-	console.log("zip",checkZip)
+
 
 		return (
 			<div>

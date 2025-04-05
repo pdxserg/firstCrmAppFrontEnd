@@ -32,7 +32,7 @@ export const Job = ({jobs}: Props) => {
 
 	const deleteJobHandler = (id: string) => {
 		// 	updateEntityStatus("loading")
-
+		setJobIdToDelete(null)
 		deleteTask(id)
 			.unwrap()
 			.then((res) => {
@@ -123,7 +123,7 @@ export const Job = ({jobs}: Props) => {
 					<button onClick={() => {
 						if(jobIdToDelete){
 							deleteJobHandler(jobIdToDelete)
-							setJobIdToDelete(null)
+
 						}
 					}
 					}>YES</button>

@@ -24,19 +24,16 @@ const AutoTypeInput = ({ names, onSelect }:Props) => {
 			setShowDropdown(false);
 			setFilteredNames([]);
 		}
-	}, [inputValue, names]);
+	}, [inputValue]);
 
 	const handleSelect = (name:string, id?:string) => {
 		// setInputValue(name);
 		onSelect(name,id);
 		setShowDropdown(false);
 		setShow(false)
+		setCreate(false)
 	};
-	// const handleSelectNewCustomer = (name:string) => {
-	// 	setInputValue(name);
-	// 	onSelect(name);
-	// 	setShowDropdown(false);
-	// };
+
 const handleClear=()=>{
 	setShow(true)
 	setInputValue("")
@@ -44,7 +41,8 @@ const handleClear=()=>{
 }
 const handleCreateNewCustomer=() => {
 	setCreate(true)
-	setShow(true)
+	// setShow(true)
+
 
 
 }
@@ -57,19 +55,25 @@ const handleCreateNewCustomer=() => {
 				onChange={(e) => setInputValue(e.target.value)}
 			/>)}
 			{showDropdown && (
-				<ul>
-					<li>
-						<button onClick={handleCreateNewCustomer}>
-							Create New: {inputValue}
-						</button>
-						{create && <CreateCustomer/>}
-					</li>
-					{filteredNames?.map((item) => (
-						<li key={item.id}>
-							<button onClick={() => handleSelect(item.customerName,item.id)}>{item.customerName}</button>
+				<div>
+					<ul>
+						<li>
+							<button onClick={handleCreateNewCustomer}>
+								Create New: {inputValue}
+							</button>
+
 						</li>
-					))}
-				</ul>
+						{filteredNames?.map((item) => (
+							<li key={item.id}>
+								<button
+									onClick={() => handleSelect(item.customerName, item.id)}>{item.customerName}</button>
+							</li>
+						))}
+					</ul>
+					{create && <CreateCustomer name={inputValue} handleSelect={handleSelect}  />}
+				</div>
+
+
 			)}
 		</div>
 	);
