@@ -21,6 +21,8 @@ export const EmailInput=({onchange}:Props)=> {
 
 	return (
 		<div>
+
+			{/*<FloatingInput label="Phone" value={""} onChange={onchangePhoneHandler} />*/}
 			<label htmlFor="emailInput">Email:</label>
 			<br/>
 			<IMaskInput

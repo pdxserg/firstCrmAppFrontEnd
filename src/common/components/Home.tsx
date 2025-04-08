@@ -4,6 +4,7 @@
 import AutoTypeInput from "./MyInputWithDropdown/MyInputWithDropdown.tsx";
 import {useState} from "react";
 import {useGetCustomersQuery} from "../../features/customers/api/customersApi.ts";
+import {FloatingInput} from "./FloatingInput/FloatingInput.tsx";
 
 export const Home = () => {
 
@@ -20,10 +21,11 @@ export const Home = () => {
 	const [selectedName, setSelectedName] = useState<string|undefined>('');
 	// const[show1,setShow1]=useState(true)
 	const handleNameSelect = (name: string|undefined, id?:string) => {
-		console.log(id)
 		setSelectedName(name);
 	};
 
+	const[clientName, setClientName]=useState("Serg")
+	const[clientName1, setClientName1]=useState("")
 
 	return (
 		<div>
@@ -69,6 +71,14 @@ export const Home = () => {
 				</div>
 					}
 			</div>
+			<div>
+				<div>custom input</div>
+				<FloatingInput label="Client name" value={clientName} onChange={e => setClientName(e.target.value)} />
+				<FloatingInput label="Client name1" value={clientName1} onChange={e => setClientName1(e.target.value)} />
+
+
+			</div>
+
 
 
 		</div>

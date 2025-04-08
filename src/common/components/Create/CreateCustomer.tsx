@@ -1,11 +1,11 @@
 
  import {ChangeEvent, useState} from "react";
-import {PhoneInput} from "../PhoneInput/PhoneInput.tsx";
 import {EmailInput} from "../EmailInput/EmailInput.tsx";
 import styles from "./CreateCustomer.module.css"
 import {toast} from "react-toastify";
 import {AddressInput, AddressType} from "../AddressInput/AddressInput.tsx";
 import {useCreateCustomerMutation} from "../../../features/customers/api/customersApi.ts";
+ import {FloatingInput} from "../FloatingInput/FloatingInput.tsx";
 
 export type CustomerType = {
 	id: string,
@@ -15,14 +15,11 @@ export type CustomerType = {
 	address:AddressType
 
 };
-type Props={
-	name:string
-	handleSelect:(customerName:string,id:string)=>void
-}
 
-export const CreateCustomer = ({handleSelect,name}:Props) => {
 
-	const [customerName, setCustomerName] = useState<string>(name)
+export const CreateCustomer = () => {
+
+	const [customerName, setCustomerName] = useState<string>("")
 	const [customerEmail, setCustomerEmail] = useState<string>("email@gmail.com")
 	const [customerPhone, setCustomerPhone] = useState<string>("3334445566")
 	const [address, setAddress]=useState<AddressType|undefined>( )
@@ -32,15 +29,15 @@ export const CreateCustomer = ({handleSelect,name}:Props) => {
 	const createCustomerHandler=()=>{
 		createCustomer({customerName, customerEmail, customerPhone, address})
 			.unwrap()
-			.then((res)=>{
-				handleSelect(res.customerName,res.id)
+			.then(()=>{
+				// handleSelect(res.customerName,res.id)
 				toast.success("Success!")
 			})
-			.catch((error) => { // Type assertion
+			.catch((error) => {
 				if (error && error.data && error.data.error) {
 					toast.error(error.data.error);
 				} else {
-					toast.error("An unexpected error occurred.");
+					toast.error("An unexpected error occurred Component CreateCastomer.");
 				}
 			});
 	}
@@ -59,8 +56,11 @@ export const CreateCustomer = ({handleSelect,name}:Props) => {
 	const onchangeEmailHandler=(email:string)=>{
 		setCustomerEmail(email)
 	}
-	const onchangePhoneHandler=(phoneNumber:string)=>{
-		setCustomerPhone(phoneNumber)
+	const onchangePhoneHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+		setCustomerPhone(e.currentTarget.value)
+	}
+	const isValidPhone = (customerPhone: string) => {
+			return /^\d{10}$/.test(customerPhone);
 	}
 	const onchangeAddress=(newAddress:AddressType|undefined )=>{
 		setAddress(newAddress)
@@ -71,19 +71,14 @@ export const CreateCustomer = ({handleSelect,name}:Props) => {
 
 			<div className={styles.centerTopElement}>
 				<h2>Create new customer</h2>
+				<FloatingInput label="Client name" value={customerName ??""} onChange={onchangeHandler} />
+				<FloatingInput type="tel" label="Phone" value={customerPhone??""} onChange={onchangePhoneHandler}
+				               error={isValidPhone(customerPhone) ? "" : "Invalid phone number"}/>
 
-				<label htmlFor="name">Name:</label>
-				<br/>
-				<input type="text" id="name" name="name" placeholder="Enter your name"
-				       value={customerName} onChange={onchangeHandler}
-				/>
-				<br/>
-				<PhoneInput onchange={onchangePhoneHandler}/>
-				<br/>
-				<AddressInput onchangeAddress={onchangeAddress}/>
 				<EmailInput onchange={onchangeEmailHandler}/>
-				<br/>
 
+				{/*<PhoneInput onchange={onchangePhoneHandler}/>*/}
+				<AddressInput onchangeAddress={onchangeAddress}/>
 				<button disabled={!address} onClick={createCustomerHandler}>Add</button>
 				{!address&&<p>you need save address</p>}
 			</div>

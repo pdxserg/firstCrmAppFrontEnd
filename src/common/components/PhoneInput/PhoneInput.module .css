@@ -1,0 +1,30 @@
+.wrapper {
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.input {
+	width: 100%;
+	padding: 12px 8px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.label {
+	position: absolute;
+	top: 12px;
+	left: 10px;
+	color: #888;
+	font-size: 16px;
+	pointer-events: none;
+	transition: 0.2s ease all;
+}
+
+.floating {
+	top: -10px;
+	left: 8px;
+	font-size: 12px;
+	background: white;
+	padding: 0 4px;
+}

@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
 import {CreateCustomer, CustomerType} from "../Create/CreateCustomer.tsx";
+import {FloatingInput} from "../FloatingInput/FloatingInput.tsx";
 type  Props= {
-	names: CustomerType[] | undefined;
+	customers: CustomerType[] | undefined;
 	onSelect: (name: string | undefined, id?: string) => void;
 	// show1: boolean
 }
 
-const AutoTypeInput = ({ names, onSelect }:Props) => {
+const AutoTypeInput = ({ customers, onSelect }:Props) => {
 	const [inputValue, setInputValue] = useState('');
 	const [filteredNames, setFilteredNames] = useState<CustomerType[]|undefined>([]);
 	const [showDropdown, setShowDropdown] = useState(false);
@@ -15,7 +16,7 @@ const AutoTypeInput = ({ names, onSelect }:Props) => {
 
 	useEffect(() => {
 		if (inputValue.length >= 3 ) {
-			const results = names?.filter((item) =>
+			const results = customers?.filter((item) =>
 				item.customerName.toLowerCase().includes(inputValue.toLowerCase())
 			);
 			setFilteredNames(results);
@@ -49,11 +50,10 @@ const handleCreateNewCustomer=() => {
 	return (
 		<div>
 			{!show && (<button onClick={handleClear}>x</button>)}
-			{show && (<input
-				type="text"
-				value={inputValue}
-				onChange={(e) => setInputValue(e.target.value)}
-			/>)}
+			{show && (
+
+				<FloatingInput label="Client name" value={inputValue} onChange={e => setInputValue(e.target.value)} />
+			)}
 			{showDropdown && (
 				<div>
 					<ul>
@@ -70,7 +70,7 @@ const handleCreateNewCustomer=() => {
 							</li>
 						))}
 					</ul>
-					{create && <CreateCustomer name={inputValue} handleSelect={handleSelect}  />}
+					{create && <CreateCustomer  />}
 				</div>
 
 

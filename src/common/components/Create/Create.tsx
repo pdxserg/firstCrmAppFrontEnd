@@ -13,7 +13,7 @@ export const Create = ( ) => {
 	return (
 		<>
 			<button onClick={()=>setIsModalOpen(true)}>Create</button>
-			<ModalRadix open={isModalOpen} onClose={() => setIsModalOpen(false)} title={'Search'}
+			<ModalRadix open={isModalOpen} onClose={() => setIsModalOpen(false)} title={'Create something new:'}
 			            description={" "}>
 				<div>
 					<Link to={Path.NewJob}><button onClick={() => setIsModalOpen(false)}>Create job</button></Link>
