@@ -1,6 +1,6 @@
 // ClientTable.tsx
 import {useState} from 'react';
-import styles from './Customer.module.css';
+import styles from './CustomerList.module.css';
 import {AddressType} from "../AddressInput/AddressInput.tsx";
 import {ModalRadix} from "../ModalRadix/ModalRadix.tsx";
 import {useDeleteCustomerMutation} from "../../../features/customers/api/customersApi.ts";
