@@ -13,6 +13,7 @@ export const Layout = () => {
 					<Link to={Path.Header}><button>Home</button></Link>
 					<Link to={Path.Jobs}><button>Jobs</button></Link>
 					<Link to={Path.NewJob}><button>Create Job</button></Link>
+					<Link to={Path.Customers}><button>Customers</button></Link>
 					<Create/>
 				</nav>
 			</header>

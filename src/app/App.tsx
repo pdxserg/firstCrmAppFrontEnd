@@ -9,6 +9,7 @@ import {Page404} from "../common/components/Page 404/Page404.tsx";
 import {Layout} from "../common/components/Layout/Layout.tsx";
 import {Home} from "../common/components/Home.tsx";
 import {CreateCustomer} from "../common/components/Create/CreateCustomer.tsx";
+import {Customers} from "../common/components/Customers/Customers.tsx";
 
 export const Path = {
 	Main: "/",
@@ -17,6 +18,7 @@ export const Path = {
 	Header: "/header",
 	NewJob: "/jobs/new-job",
 	NewCustomer: "/jobs/new-customer",
+	Customers: "/customers"
 	// Login: "/login",
 } as const
 
@@ -32,7 +34,9 @@ function App() {
 					<Route path={Path.Jobs} element={<Jobs />} />
 					<Route path={Path.NewJob} element={<NewJob />} />
 					<Route path={Path.NewCustomer} element={<CreateCustomer />} />
+					<Route path={Path.Customers} element={<Customers />} />
 					<Route path={Path.NotFound} element={<Page404 />} />
+
 
 					{/*<Route path={Path.Login} element={<Login />} />*/}
 				</Route>

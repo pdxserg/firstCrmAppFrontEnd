@@ -123,7 +123,6 @@ export const Job = ({jobs}: Props) => {
 					<button onClick={() => {
 						if(jobIdToDelete){
 							deleteJobHandler(jobIdToDelete)
-
 						}
 					}
 					}>YES</button>

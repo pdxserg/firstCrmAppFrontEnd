@@ -76,18 +76,18 @@ export const customersApi = createApi({
 			// 	},
 			// 	invalidatesTags: ["Customers"]
 			// }),
-			// deleteJob: build.mutation<{ message: string }, string>({
-			// 	query: (id) => {
-			// 		return {
-			// 			method: "DELETE",
-			// 			url: `/api/jobs/${id}`,
-			// 		}
-			// 	},
-			// 	invalidatesTags: ["Customers"]
-			// }),
+			deleteCustomer: build.mutation<{ message: string }, string>({
+				query: (id) => {
+					return {
+						method: "DELETE",
+						url: `/api/customers/${id}`,
+					}
+				},
+				invalidatesTags: ["Customers"]
+			}),
 		}
 	},
 })
 
 // 7
-export const {useGetCustomersQuery,  useCreateCustomerMutation} = customersApi
+export const {useGetCustomersQuery,  useCreateCustomerMutation,useDeleteCustomerMutation} = customersApi
