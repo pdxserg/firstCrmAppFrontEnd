@@ -1,16 +1,32 @@
 // Customer.tsx
 import { useState } from 'react';
 import styles from './Customer.module.css';
+import {AddressType} from "../AddressInput/AddressInput.tsx";
 
 type Tab = 'info' | 'jobs' | 'estimates' | 'invoices' | 'payments' | 'addresses';
 
+export type CustomerType = {
+	id: string,
+	customerName: string
+	customerEmail: string
+	customerPhone: string
+	address: AddressType
+
+};
+export type AddressType={
+	houseStreet:string
+	suitApt:string
+	city:string
+	state:string
+	zip:string
+}
 interface CustomerProps {
 	// You can add props as needed
 }
 
 const Customer: React.FC<CustomerProps> = () => {
 	const [activeTab, setActiveTab] = useState<Tab>('info');
-	const [customerInfo, setCustomerInfo] = useState({
+	const [customerInfo, setCustomerInfo] = useState<CustomerType>({
 		firstName: 'WWWW',
 		lastName: '',
 		companyName: '',
@@ -19,7 +35,7 @@ const Customer: React.FC<CustomerProps> = () => {
 		email: '',
 		description: '',
 		adSource: '',
-		address: '234 SE 136th Ave, Vancouver, Washington 98684',
+		address: { },
 		billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
 		autoInvoicing: false,
 		allowBilling: false,
@@ -163,8 +179,8 @@ const Customer: React.FC<CustomerProps> = () => {
 										>
 											<option value="">Select Ad Source</option>
 											<option value="referral">Referral</option>
-											<option value="online">Online</option>
-											<option value="other">Other</option>
+											<option value="online">Google</option>
+											<option value="other">Thumbtack</option>
 										</select>
 									</div>
 								</div>
@@ -202,56 +218,56 @@ const Customer: React.FC<CustomerProps> = () => {
 									</div>
 								</div>
 
-								<div className={styles.formGroup}>
-									<div className={styles.linkText}>
-										Turn On Auto Invoicing
-									</div>
-								</div>
+								{/*<div className={styles.formGroup}>*/}
+								{/*	<div className={styles.linkText}>*/}
+								{/*		Turn On Auto Invoicing*/}
+								{/*	</div>*/}
+								{/*</div>*/}
 
-								<div className={styles.formGroup}>
-									<label className={styles.label}>Allow Billing</label>
-									<div className={styles.toggle}>
-										<div className={styles.toggleOption}>NO</div>
-									</div>
-									<div className={styles.helpText}>
-										Allows you to close jobs with due balance
-									</div>
-								</div>
+								{/*<div className={styles.formGroup}>*/}
+								{/*	<label className={styles.label}>Allow Billing</label>*/}
+								{/*	<div className={styles.toggle}>*/}
+								{/*		<div className={styles.toggleOption}>NO</div>*/}
+								{/*	</div>*/}
+								{/*	<div className={styles.helpText}>*/}
+								{/*		Allows you to close jobs with due balance*/}
+								{/*	</div>*/}
+								{/*</div>*/}
 
-								<div className={styles.formGroup}>
-									<label htmlFor="paymentTerms" className={styles.label}>Client Payment Terms</label>
-									<div className={styles.selectWrapper}>
-										<select
-											id="paymentTerms"
-											name="paymentTerms"
-											value={customerInfo.paymentTerms}
-											onChange={handleInputChange}
-											className={styles.select}
-										>
-											<option value="Use default (use account value)">Use default (use account value)</option>
-											<option value="net30">Net 30</option>
-											<option value="net15">Net 15</option>
-										</select>
-									</div>
-								</div>
+								{/*<div className={styles.formGroup}>*/}
+								{/*	<label htmlFor="paymentTerms" className={styles.label}>Client Payment Terms</label>*/}
+								{/*	<div className={styles.selectWrapper}>*/}
+								{/*		<select*/}
+								{/*			id="paymentTerms"*/}
+								{/*			name="paymentTerms"*/}
+								{/*			value={customerInfo.paymentTerms}*/}
+								{/*			onChange={handleInputChange}*/}
+								{/*			className={styles.select}*/}
+								{/*		>*/}
+								{/*			<option value="Use default (use account value)">Use default (use account value)</option>*/}
+								{/*			<option value="net30">Net 30</option>*/}
+								{/*			<option value="net15">Net 15</option>*/}
+								{/*		</select>*/}
+								{/*	</div>*/}
+								{/*</div>*/}
 
-								<div className={styles.formGroup}>
-									<label htmlFor="parentClient" className={styles.label}>Set A Parent Client</label>
-									<input
-										type="text"
-										id="parentClient"
-										name="parentClient"
-										value={customerInfo.parentClient}
-										onChange={handleInputChange}
-										className={styles.input}
-									/>
-								</div>
+								{/*<div className={styles.formGroup}>*/}
+								{/*	<label htmlFor="parentClient" className={styles.label}>Set A Parent Client</label>*/}
+								{/*	<input*/}
+								{/*		type="text"*/}
+								{/*		id="parentClient"*/}
+								{/*		name="parentClient"*/}
+								{/*		value={customerInfo.parentClient}*/}
+								{/*		onChange={handleInputChange}*/}
+								{/*		className={styles.input}*/}
+								{/*	/>*/}
+								{/*</div>*/}
 
-								<div className={styles.formGroup}>
-									<div className={styles.linkText}>
-										What are parent clients?
-									</div>
-								</div>
+								{/*<div className={styles.formGroup}>*/}
+								{/*	<div className={styles.linkText}>*/}
+								{/*		What are parent clients?*/}
+								{/*	</div>*/}
+								{/*</div>*/}
 							</div>
 						</div>
 					</div>

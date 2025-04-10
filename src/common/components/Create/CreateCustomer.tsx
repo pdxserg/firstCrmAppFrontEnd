@@ -5,6 +5,8 @@ import {toast} from "react-toastify";
 import {AddressInput, AddressType} from "../AddressInput/AddressInput.tsx";
 import {useCreateCustomerMutation} from "../../../features/customers/api/customersApi.ts";
 import {FloatingInput} from "../FloatingInput/FloatingInput.tsx";
+import {Path} from "../../../app/App.tsx";
+import {Link, useNavigate} from "react-router-dom";
 
 export type CustomerType = {
 	id: string,
@@ -27,13 +29,13 @@ export const CreateCustomer = ({onCancel, onSuccess}: Props) => {
 	const [address, setAddress] = useState<AddressType | undefined>()
 
 	const [createCustomer] = useCreateCustomerMutation()
-
+	const navigate = useNavigate();
 	const createCustomerHandler = () => {
 		onSuccess()
 		createCustomer({customerName, customerEmail, customerPhone, address})
 			.unwrap()
-			.then(() => {
-				// handleSelect(res.customerName,res.id)
+			.then((res) => {
+			 navigate(`/customer/${res.id}`)
 				toast.success("Success!")
 			})
 			.catch((error) => {
@@ -82,7 +84,9 @@ export const CreateCustomer = ({onCancel, onSuccess}: Props) => {
 
 				{/*<PhoneInput onchange={onchangePhoneHandler}/>*/}
 				<AddressInput onchangeAddress={onchangeAddress}/>
-				<button disabled={!address} onClick={createCustomerHandler}>Add</button>
+				<Link to={Path.Customer}>
+					<button disabled={!address} onClick={createCustomerHandler}>Add</button>
+				</Link>
 				<button onClick={onCancel}>Cancel</button>
 				{!address && <p>you need save address</p>}
 			</div>

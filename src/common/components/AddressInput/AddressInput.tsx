@@ -18,7 +18,7 @@ export const  AddressInput=({onchangeAddress}:Props)=>{
 		const [suitApt, setSuitApt] = useState('');
 		const [city, setCity] = useState('');
 		const [state, setState] = useState('');
-		const [zip, setZip] = useState('');
+		const [zip, setZip] = useState('98607');
 		const [error, setError] = useState('');
 
 		// const [isFull,setIsFull]=useState(false)
