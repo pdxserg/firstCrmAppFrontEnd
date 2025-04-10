@@ -1,10 +1,11 @@
 // @flow
 
 
-import AutoTypeInput from "./MyInputWithDropdown/MyInputWithDropdown.tsx";
+
 import {useState} from "react";
-import {useGetCustomersQuery} from "../../features/customers/api/customersApi.ts";
+
 import {FloatingInput} from "./FloatingInput/FloatingInput.tsx";
+import Customer from "./Customer/Customer.tsx";
 
 export const Home = () => {
 
@@ -16,13 +17,7 @@ export const Home = () => {
 	const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedDestination}`;
 
 
-	const {data} = useGetCustomersQuery()
-	const names = data?.items
-	const [selectedName, setSelectedName] = useState<string|undefined>('');
-	// const[show1,setShow1]=useState(true)
-	const handleNameSelect = (name: string|undefined, id?:string) => {
-		setSelectedName(name);
-	};
+
 
 	const[clientName, setClientName]=useState("Serg")
 	const[clientName1, setClientName1]=useState("")
@@ -63,23 +58,12 @@ export const Home = () => {
 			</div>
 
 			<div>
-				Customer
-				<AutoTypeInput names={names}   onSelect={handleNameSelect}/>
-				{selectedName && <div>
-                    <span>Selected: {selectedName}</span>
-                    {/*<button onClick={()=>setShow1(true)}>x</button>*/}
-				</div>
-					}
-			</div>
-			<div>
 				<div>custom input</div>
 				<FloatingInput label="Client name" value={clientName} onChange={e => setClientName(e.target.value)} />
 				<FloatingInput label="Client name1" value={clientName1} onChange={e => setClientName1(e.target.value)} />
-
-
 			</div>
 
-
+<Customer/>
 
 		</div>
 	);
