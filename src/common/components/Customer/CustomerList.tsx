@@ -5,6 +5,7 @@ import {AddressType} from "../AddressInput/AddressInput.tsx";
 import {ModalRadix} from "../ModalRadix/ModalRadix.tsx";
 import {useDeleteCustomerMutation} from "../../../features/customers/api/customersApi.ts";
 import {toast} from "react-toastify";
+import {CreateCustomer} from "../Create/CreateCustomer.tsx";
 
 export interface ClientType {
 	id: string;
@@ -29,19 +30,21 @@ export type CustomerType = {
 type CustomerProps = {
 	customers: CustomerType[] | undefined;
 	onClientSelect?: (client: CustomerType) => void;
-	onAddClient?: () => void;
+	// onAddClient?: () => void;
 }
 
 export const CustomerList = ({
 	                             customers,
 	                             onClientSelect,
-	                             onAddClient
                              }: CustomerProps) => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [selectedClientIds, setSelectedClientIds] = useState<string[]>([]);
 	const [customerIdToDelete, setCustomerIdToDelete] = useState<null | string>(null);
+	const [showAddForm, setShowAddForm] = useState(false);
 
 	const [deleteCustomer] = useDeleteCustomerMutation()
+
+
 
 	const deleteCustomerHandler = (id: string) => {
 		setCustomerIdToDelete(null)
@@ -134,70 +137,80 @@ export const CustomerList = ({
 					/>
 				</div>
 				<div className={styles.actions}>
-					<button className={styles.addButton} onClick={onAddClient}>
+					<button className={styles.addButton} onClick={()=>setShowAddForm(true)}>
 						+ Add Client
 					</button>
 				</div>
 			</div>
-
-			<div className={styles.table}>
-				<div className={styles.tableRow + ' ' + styles.headerRow}>
-					<div className={styles.checkboxCell}>
-						<input
-							type="checkbox"
-							onChange={handleSelectAll}
-							checked={selectedClientIds.length === customers!.length && customers!.length > 0}
-						/>
+			{showAddForm &&
+				<div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <CreateCustomer
+                            onSuccess={() => setShowAddForm(false)}
+                            onCancel={() => setShowAddForm(false)}
+                        />
 					</div>
-					<div className={styles.cell}>ID</div>
-					<div className={styles.cell}>Name</div>
-					<div className={styles.cell}>Company</div>
-					<div className={styles.cell}>Address</div>
-					<div className={styles.cell}>Phone</div>
-					<div className={styles.cell}>Created</div>
 				</div>
+					}
+                    <div className={styles.table}>
+                        <div className={styles.tableRow + ' ' + styles.headerRow}>
+                            <div className={styles.checkboxCell}>
+                                <input
+                                    type="checkbox"
+                                    onChange={handleSelectAll}
+                                    checked={selectedClientIds.length === customers!.length && customers!.length > 0}
+                                />
+                            </div>
+                            <div className={styles.cell}>ID</div>
+                            <div className={styles.cell}>Name</div>
+                            <div className={styles.cell}>Company</div>
+                            <div className={styles.cell}>Address</div>
+                            <div className={styles.cell}>Phone</div>
+                            <div className={styles.cell}>Created</div>
+                        </div>
 
-				{filteredClients.length > 0 ? (
-					filteredClients.map((client) => (
-						<div
-							key={client.id}
-							className={styles.tableRow}
-							onClick={() => handleClientSelect(client)}
-						>
-							<div className={styles.checkboxCell} onClick={(e) => e.stopPropagation()}>
-								<input
-									type="checkbox"
-									checked={selectedClientIds.includes(client.id)}
-									onChange={() => handleCheckboxChange(client.id)}
-								/>
+						{filteredClients.length > 0 ? (
+							filteredClients.map((client) => (
+								<div
+									key={client.id}
+									className={styles.tableRow}
+									onClick={() => handleClientSelect(client)}
+								>
+									<div className={styles.checkboxCell} onClick={(e) => e.stopPropagation()}>
+										<input
+											type="checkbox"
+											checked={selectedClientIds.includes(client.id)}
+											onChange={() => handleCheckboxChange(client.id)}
+										/>
+									</div>
+									<div className={styles.cellID}>
+										<button onClick={() => setCustomerIdToDelete(client.id)}>x</button>
+									</div>
+									<div className={styles.nameCell}>
+										<div>{client.customerName}</div>
+										{client.customerEmail &&
+                                            <div className={styles.email}>{client.customerEmail}</div>}
+									</div>
+									<div className={styles.cell}>{client.customerPhone || '-'}</div>
+									<div
+										className={styles.cell}>{client.address.houseStreet + " " + client.address.city || '-'}</div>
+									<div className={styles.cell}>
+										{client.customerPhone ? (
+											<a href={`tel:${client.customerPhone}`} className={styles.phoneLink}
+											   onClick={(e) => e.stopPropagation()}>
+												{client.customerPhone}
+											</a>
+										) : '-'}
+									</div>
+									<div className={styles.cell}>{'-'}</div>
+								</div>
+							))
+						) : (
+							<div className={styles.emptyState}>
+								No clients found. Try adjusting your search or add a new client.
 							</div>
-							<div className={styles.cellID}>
-								<button onClick={() => setCustomerIdToDelete(client.id)}>x</button>
-							</div>
-							<div className={styles.nameCell}>
-								<div>{client.customerName}</div>
-								{client.customerEmail && <div className={styles.email}>{client.customerEmail}</div>}
-							</div>
-							<div className={styles.cell}>{client.customerPhone || '-'}</div>
-							<div
-								className={styles.cell}>{client.address.houseStreet + " " + client.address.city || '-'}</div>
-							<div className={styles.cell}>
-								{client.customerPhone ? (
-									<a href={`tel:${client.customerPhone}`} className={styles.phoneLink}
-									   onClick={(e) => e.stopPropagation()}>
-										{client.customerPhone}
-									</a>
-								) : '-'}
-							</div>
-							<div className={styles.cell}>{'-'}</div>
-						</div>
-					))
-				) : (
-					<div className={styles.emptyState}>
-						No clients found. Try adjusting your search or add a new client.
-					</div>
-				)}
-			</div>
-		</div>
-	);
-};
+						)}
+                    </div>
+                </div>
+                );
+				};

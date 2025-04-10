@@ -83,7 +83,7 @@ export const CreateCustomer = ({onCancel, onSuccess}: Props) => {
 				{/*<PhoneInput onchange={onchangePhoneHandler}/>*/}
 				<AddressInput onchangeAddress={onchangeAddress}/>
 				<button disabled={!address} onClick={createCustomerHandler}>Add</button>
-				<button   onClick={onCancel}>Cancel</button>
+				<button onClick={onCancel}>Cancel</button>
 				{!address && <p>you need save address</p>}
 			</div>
 		</div>

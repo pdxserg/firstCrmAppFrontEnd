@@ -9,7 +9,7 @@ export const Customers = () => {
 
 	return (
 		<div>
-			<CustomerList customers={customers}/>
+			<CustomerList customers={customers}  />
 		</div>
 	);
 };
