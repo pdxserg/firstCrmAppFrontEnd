@@ -1,7 +1,10 @@
 // Customer.tsx
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import styles from './Customer.module.css';
-import {AddressType} from "../AddressInput/AddressInput.tsx";
+
+import {useParams} from "react-router-dom";
+import {useGetCustomersByIdQuery} from "../../../features/customers/api/customersApi.ts";
+
 
 type Tab = 'info' | 'jobs' | 'estimates' | 'invoices' | 'payments' | 'addresses';
 
@@ -25,23 +28,39 @@ interface CustomerProps {
 }
 
 const Customer: React.FC<CustomerProps> = () => {
+	const { id } = useParams()
+	console.log('useparam',id)
 	const [activeTab, setActiveTab] = useState<Tab>('info');
-	const [customerInfo, setCustomerInfo] = useState<CustomerType>({
-		firstName: 'WWWW',
-		lastName: '',
-		companyName: '',
-		phoneNumber: '4324523523',
-		secondaryPhone: '',
-		email: '',
-		description: '',
-		adSource: '',
-		address: { },
-		billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
-		autoInvoicing: false,
-		allowBilling: false,
-		paymentTerms: 'Use default (use account value)',
-		parentClient: ''
-	});
+
+	const [customerInfo, setCustomerInfo] = useState<CustomerType>(
+		{
+		id:"",
+		customerName: 'Customer name',
+		customerPhone: '4324523523',
+		customerEmail: '',
+		address: {houseStreet:"", city:'', zip:'', suitApt:"", state:'' },
+		// lastName: '',
+		// companyName: '',
+		// secondaryPhone: '',
+		// description: '',
+		// adSource: '',
+		// billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
+		// autoInvoicing: false,
+		// allowBilling: false,
+		// paymentTerms: 'Use default (use account value)',
+		// parentClient: ''
+	}
+	)
+const{data, isLoading,isError}=useGetCustomersByIdQuery({id})
+
+	useEffect(() => {
+		if (data){
+			setCustomerInfo(data.customer)
+			console.log(data.customer)
+		}
+	}, [data]);
+
+
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
@@ -72,7 +91,7 @@ const Customer: React.FC<CustomerProps> = () => {
 												type="text"
 												id="firstName"
 												name="firstName"
-												value={customerInfo.firstName}
+												value={customerInfo.customerName}
 												onChange={handleInputChange}
 												className={styles.input}
 											/>
@@ -83,7 +102,7 @@ const Customer: React.FC<CustomerProps> = () => {
 												type="text"
 												id="lastName"
 												name="lastName"
-												value={customerInfo.lastName}
+												value={customerInfo.customerName}
 												onChange={handleInputChange}
 												className={styles.input}
 											/>
@@ -97,7 +116,7 @@ const Customer: React.FC<CustomerProps> = () => {
 										type="text"
 										id="companyName"
 										name="companyName"
-										value={customerInfo.companyName}
+										value={customerInfo.customerName}
 										onChange={handleInputChange}
 										className={styles.input}
 									/>
@@ -111,7 +130,7 @@ const Customer: React.FC<CustomerProps> = () => {
 											type="tel"
 											id="phoneNumber"
 											name="phoneNumber"
-											value={customerInfo.phoneNumber}
+											value={customerInfo.customerPhone}
 											onChange={handleInputChange}
 											className={styles.input}
 										/>
@@ -132,7 +151,7 @@ const Customer: React.FC<CustomerProps> = () => {
 											type="tel"
 											id="secondaryPhone"
 											name="secondaryPhone"
-											value={customerInfo.secondaryPhone}
+											value={customerInfo.customerPhone}
 											onChange={handleInputChange}
 											className={styles.input}
 										/>
@@ -148,7 +167,7 @@ const Customer: React.FC<CustomerProps> = () => {
 										type="email"
 										id="email"
 										name="email"
-										value={customerInfo.email}
+										value={customerInfo.customerEmail}
 										onChange={handleInputChange}
 										className={styles.input}
 									/>
@@ -159,7 +178,7 @@ const Customer: React.FC<CustomerProps> = () => {
 									<textarea
 										id="description"
 										name="description"
-										value={customerInfo.description}
+										value={customerInfo.customerName}
 										onChange={handleInputChange}
 										className={styles.textarea}
 										placeholder="Add the most important information about your client that will be displayed on the page"
@@ -173,7 +192,7 @@ const Customer: React.FC<CustomerProps> = () => {
 										<select
 											id="adSource"
 											name="adSource"
-											value={customerInfo.adSource}
+											value={customerInfo.customerPhone}
 											onChange={handleInputChange}
 											className={styles.select}
 										>
@@ -196,7 +215,7 @@ const Customer: React.FC<CustomerProps> = () => {
 											type="text"
 											id="address"
 											name="address"
-											value={customerInfo.address}
+											value={customerInfo.address.zip}
 											onChange={handleInputChange}
 											className={styles.input}
 										/>
@@ -211,7 +230,7 @@ const Customer: React.FC<CustomerProps> = () => {
 											type="text"
 											id="billToAddress"
 											name="billToAddress"
-											value={customerInfo.billToAddress}
+											value={customerInfo.address.zip}
 											onChange={handleInputChange}
 											className={styles.input}
 										/>
@@ -286,6 +305,9 @@ const Customer: React.FC<CustomerProps> = () => {
 				return <div className={styles.tabContent}>Select a tab to view content</div>;
 		}
 	};
+	if (isLoading) return <div>Loading...</div>;
+	if (isError) return <div>Error loading customer</div>;
+	if (!data) return <div>Customer not found</div>;
 
 	return (
 		<div className={styles.customerContainer}>

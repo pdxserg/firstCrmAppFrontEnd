@@ -31,7 +31,7 @@ export const customersApi = createApi({
 				},
 				providesTags: ["Customers"]
 			}),
-			getCustomersById: build.query<Response, { id: string }>({
+			getCustomersById: build.query<{message:string, customer:CustomerType }, { id: string |undefined }>({
 				query: ({id}) => {
 					return {
 						url: `/api/customers/${id}`,
@@ -90,4 +90,4 @@ export const customersApi = createApi({
 })
 
 // 7
-export const {useGetCustomersQuery,  useCreateCustomerMutation,useDeleteCustomerMutation} = customersApi
+export const {useGetCustomersQuery, useGetCustomersByIdQuery, useCreateCustomerMutation,useDeleteCustomerMutation} = customersApi
