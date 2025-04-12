@@ -4,7 +4,8 @@ import styles from './Customer.module.css';
 
 import {useParams} from "react-router-dom";
 import {useGetCustomersByIdQuery} from "../../../features/customers/api/customersApi.ts";
-import {InfoTab} from "../InfoTab/InfoTab.tsx";
+import {InfoTab} from "./tabContent/InfoTab/InfoTab.tsx";
+import {CustomerJobs} from "./tabContent/CustomerJobs/CustomerJobs.tsx";
 
 
 type Tab = 'info' | 'jobs' | 'estimates' | 'invoices' | 'payments' | 'addresses';
@@ -79,14 +80,9 @@ const{data, isLoading,isError}=useGetCustomersByIdQuery({id})
 	const renderTabContent = () => {
 		 switch (activeTab) {
 			case 'info':
-				return (
-					<InfoTab customerInfo={customerInfo} handleInputChange={handleInputChange}/>
-				);
+				return <InfoTab customerInfo={customerInfo} handleInputChange={handleInputChange}/>
 			case 'jobs':
-				return <div className={styles.tabContent}>Jobs content will be displayed here
-
-
-				</div>;
+				return <CustomerJobs customerInfo={customerInfo} />
 			case 'estimates':
 				return <div className={styles.tabContent}>Estimates content will be displayed here</div>;
 			case 'invoices':

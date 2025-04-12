@@ -1,5 +1,5 @@
 import {useGetCustomersQuery} from "../../../features/customers/api/customersApi.ts";
-import {CustomerList} from "../Customer/CustomerList.tsx";
+import {CustomerList} from "./CustomerList.tsx";
 
 
 export const Customers = () => {

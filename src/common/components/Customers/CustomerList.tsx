@@ -184,7 +184,12 @@ export const CustomerList = ({
 										/>
 									</div>
 									<div className={styles.cellID}>
-										<button onClick={() => setCustomerIdToDelete(client.id)}>x</button>
+										<button  className={styles.deleteButton}
+										         onClick={(e) =>{
+											         e.stopPropagation()
+													 setCustomerIdToDelete(client.id)
+										}}
+										>x</button>
 									</div>
 									<div className={styles.nameCell}>
 										<div>{client.customerName}</div>

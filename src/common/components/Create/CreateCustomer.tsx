@@ -17,7 +17,7 @@ export type CustomerType = {
 };
 type Props = {
 	onSuccess: () => void
-	onCancel: () => void
+	onCancel?: () => void
 }
 
 export const CreateCustomer = ({onCancel, onSuccess}: Props) => {

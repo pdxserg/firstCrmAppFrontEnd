@@ -5,7 +5,7 @@ import {ModalRadix} from "../ModalRadix/ModalRadix.tsx";
 import {useState} from "react";
 import {Path} from "../../../app/App.tsx";
 import {Link} from "react-router-dom";
-import styles from "../Customer/CustomerList.module.css";
+import styles from "../Customers/CustomerList.module.css";
 import {CreateCustomer} from "./CreateCustomer.tsx";
 
 

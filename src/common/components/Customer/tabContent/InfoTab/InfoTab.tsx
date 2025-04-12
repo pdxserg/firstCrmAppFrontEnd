@@ -1,7 +1,7 @@
 // @flow
 
 import styles from "./InfoTab.module.css";
-import {CustomerType} from "../Customer/Customer.tsx";
+import {CustomerType} from "../../Customer.tsx";
 
 type Props = {
 	customerInfo:CustomerType

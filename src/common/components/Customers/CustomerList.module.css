@@ -1,0 +1,168 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.tableContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.searchContainer {
+    flex: 1;
+}
+
+.searchInput {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.addButton {
+    background-color: #ffd600;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.addButton:hover {
+    background-color: #ffea00;
+}
+ .deleteButton:hover {
+    background-color: #ffea00;
+}
+
+.deleteButton {
+    background-color: #ffd600;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+ z-index: 999;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableRow {
+    display: grid;
+    grid-template-columns: 40px 40px 1.5fr 1fr 1.5fr 1fr 1fr;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+
+.tableRow:hover {
+    background-color: #f9f9f9;
+}
+
+.headerRow {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    cursor: default;
+}
+.checkboxCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+}
+.cellID {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.nameCell {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.cell {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.email {
+    font-size: 12px;
+    color: #757575;
+    margin-top: 4px;
+}
+.phoneLink {
+    color: #2962ff;
+    text-decoration: none;
+}
+.phoneLink:hover {
+    text-decoration: underline;
+}
+
+.emptyState {
+    padding: 40px 16px;
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .tableRow {
+        grid-template-columns: 40px 50px 1.5fr 1.5fr;
+    }
+
+    .tableRow .cell:nth-child(4),
+    .tableRow .cell:nth-child(5),
+    .tableRow .cell:nth-child(7) {
+        display: none;
+    }
+}
