@@ -5,7 +5,6 @@
 import {useState} from "react";
 
 import {FloatingInput} from "./FloatingInput/FloatingInput.tsx";
-import Customer from "./Customer/Customer.tsx";
 
 export const Home = () => {
 
@@ -63,7 +62,6 @@ export const Home = () => {
 				<FloatingInput label="Client name1" value={clientName1} onChange={e => setClientName1(e.target.value)} />
 			</div>
 
-<Customer/>
 
 		</div>
 	);

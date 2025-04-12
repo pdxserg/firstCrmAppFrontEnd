@@ -6,6 +6,7 @@ import {ModalRadix} from "../ModalRadix/ModalRadix.tsx";
 import {useDeleteCustomerMutation} from "../../../features/customers/api/customersApi.ts";
 import {toast} from "react-toastify";
 import {CreateCustomer} from "../Create/CreateCustomer.tsx";
+import {useNavigate} from "react-router-dom";
 
 export interface ClientType {
 	id: string;
@@ -29,19 +30,19 @@ export type CustomerType = {
 
 type CustomerProps = {
 	customers: CustomerType[] | undefined;
-	onClientSelect?: (client: CustomerType) => void;
+	// onClientSelect?: (client: CustomerType) => void;
 	// onAddClient?: () => void;
 }
 
 export const CustomerList = ({
 	                             customers,
-	                             onClientSelect,
                              }: CustomerProps) => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [selectedClientIds, setSelectedClientIds] = useState<string[]>([]);
 	const [customerIdToDelete, setCustomerIdToDelete] = useState<null | string>(null);
 	const [showAddForm, setShowAddForm] = useState(false);
 
+	const navigate =useNavigate()
 	const [deleteCustomer] = useDeleteCustomerMutation()
 
 
@@ -64,10 +65,9 @@ export const CustomerList = ({
 	}
 
 
-	const handleClientSelect = (client: CustomerType) => {
-		if (onClientSelect) {
-			onClientSelect(client);
-		}
+	const handleClientSelect = (id: string) => {
+		navigate(`/customer/${id}`)
+
 	};
 
 	const handleCheckboxChange = (clientId: string) => {
@@ -174,7 +174,7 @@ export const CustomerList = ({
 								<div
 									key={client.id}
 									className={styles.tableRow}
-									onClick={() => handleClientSelect(client)}
+									onClick={() => handleClientSelect(client.id)}
 								>
 									<div className={styles.checkboxCell} onClick={(e) => e.stopPropagation()}>
 										<input
@@ -191,7 +191,7 @@ export const CustomerList = ({
 										{client.customerEmail &&
                                             <div className={styles.email}>{client.customerEmail}</div>}
 									</div>
-									<div className={styles.cell}>{client.customerPhone || '-'}</div>
+									<div className={styles.cell}>{client.id || '-'}</div>
 									<div
 										className={styles.cell}>{client.address.houseStreet + " " + client.address.city || '-'}</div>
 									<div className={styles.cell}>
