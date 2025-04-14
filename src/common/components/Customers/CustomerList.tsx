@@ -1,11 +1,10 @@
 // ClientTable.tsx
 import {useState} from 'react';
 import styles from './CustomerList.module.css';
-import {AddressType} from "../AddressInput/AddressInput.tsx";
-import {ModalRadix} from "../ModalRadix/ModalRadix.tsx";
+ import {ModalRadix} from "../ModalRadix/ModalRadix.tsx";
 import {useDeleteCustomerMutation} from "../../../features/customers/api/customersApi.ts";
 import {toast} from "react-toastify";
-import {CreateCustomer} from "../Create/CreateCustomer.tsx";
+import {CreateCustomer, CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
 import {useNavigate} from "react-router-dom";
 
 export interface ClientType {
@@ -18,14 +17,7 @@ export interface ClientType {
 	// created?: string;
 }
 
-export type CustomerType = {
-	id: string,
-	customerName: string
-	customerEmail: string
-	customerPhone: string
-	address: AddressType
 
-};
 
 
 type CustomerProps = {
@@ -80,7 +72,7 @@ export const CustomerList = ({
 
 	const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.checked) {
-			setSelectedClientIds(customers!.map(client => client.id));
+			setSelectedClientIds(customers!.map(client => client.customerId));
 		} else {
 			setSelectedClientIds([]);
 		}
@@ -172,22 +164,22 @@ export const CustomerList = ({
 						{filteredClients.length > 0 ? (
 							filteredClients.map((client) => (
 								<div
-									key={client.id}
+									key={client.customerId}
 									className={styles.tableRow}
-									onClick={() => handleClientSelect(client.id)}
+									onClick={() => handleClientSelect(client.customerId)}
 								>
 									<div className={styles.checkboxCell} onClick={(e) => e.stopPropagation()}>
 										<input
 											type="checkbox"
-											checked={selectedClientIds.includes(client.id)}
-											onChange={() => handleCheckboxChange(client.id)}
+											checked={selectedClientIds.includes(client.customerId)}
+											onChange={() => handleCheckboxChange(client.customerId)}
 										/>
 									</div>
 									<div className={styles.cellID}>
 										<button  className={styles.deleteButton}
 										         onClick={(e) =>{
 											         e.stopPropagation()
-													 setCustomerIdToDelete(client.id)
+													 setCustomerIdToDelete(client.customerId)
 										}}
 										>x</button>
 									</div>
@@ -196,7 +188,7 @@ export const CustomerList = ({
 										{client.customerEmail &&
                                             <div className={styles.email}>{client.customerEmail}</div>}
 									</div>
-									<div className={styles.cell}>{client.id || '-'}</div>
+									<div className={styles.cell}>{client.customerId || '-'}</div>
 									<div
 										className={styles.cell}>{client.address.houseStreet + " " + client.address.city || '-'}</div>
 									<div className={styles.cell}>

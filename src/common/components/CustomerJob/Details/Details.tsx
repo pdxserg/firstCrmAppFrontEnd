@@ -1,19 +1,36 @@
 // @flow
 
-import styles from "./InfoTab.module.css";
-import {CustomerType} from "../../../Create/CreateCustomer/CreateCustomer.tsx";
 
+import styles from "./Details.module.css"
+import {CustomerType} from "../../Create/CreateCustomer/CreateCustomer.tsx";
+import {ChangeEvent, useState} from "react";
+import TypeEquipment from "./components/TypeApplience/TypeEquipment.tsx";
 
 type Props = {
-	customerInfo:CustomerType
-	handleInputChange:(e:any)=>void
+	customerInfo: CustomerType
+	handleInputChange: (e: any) => void
+	maxLength?:number
 };
-export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
+export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props) => {
+
+	const [inputValue, setInputValue] = useState<string>('');
+
+	const handleInputChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		let value = e.target.value;
+		if (value.length > maxLength) {
+			value = value.substring(0, maxLength);
+		}
+		setInputValue(value);
+	}
+
 	return (
 		<div className={styles.tabContent}>
 			<div className={styles.twoColumn}>
+
 				<div className={styles.column}>
 					<h2 className={styles.sectionTitle}>Client Details</h2>
+
+					{/*//name*/}
 					<div className={styles.formGroup}>
 						<div className={styles.nameFields}>
 							<div className={styles.inputGroup}>
@@ -41,6 +58,7 @@ export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
 						</div>
 					</div>
 
+					{/*//company name*/}
 					<div className={styles.formGroup}>
 						<label htmlFor="companyName" className={styles.label}>Company Name</label>
 						<input
@@ -54,6 +72,8 @@ export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
 					</div>
 
 					<h2 className={styles.sectionTitle}>Contact Information</h2>
+
+					{/*//phone*/}
 					<div className={styles.formGroup}>
 						<label htmlFor="phoneNumber" className={styles.label}>Phone Number</label>
 						<div className={styles.phoneField}>
@@ -75,6 +95,7 @@ export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
 						</div>
 					</div>
 
+					{/*//phone*/}
 					<div className={styles.formGroup}>
 						<label htmlFor="secondaryPhone" className={styles.label}>Secondary Phone</label>
 						<div className={styles.phoneField}>
@@ -92,6 +113,7 @@ export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
 						</div>
 					</div>
 
+					{/*// email*/}
 					<div className={styles.formGroup}>
 						<label htmlFor="email" className={styles.label}>Email</label>
 						<input
@@ -104,40 +126,45 @@ export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
 						/>
 					</div>
 
-					<div className={styles.formGroup}>
-						<label htmlFor="description" className={styles.label}>Description</label>
+					{/*//ad source*/}
+					<TypeEquipment  />
+
+					{/*//description*/}
+					<div className={styles.textAreaContainer}>
 						<textarea
-							id="description"
-							name="description"
-							value={customerInfo.customerName}
-							onChange={handleInputChange}
-							className={styles.textarea}
-							placeholder="Add the most important information about your client that will be displayed on the page"
-						></textarea>
-						<div className={styles.charCount}>0 / 160</div>
+							className={styles.textArea}
+							value={inputValue}
+							onChange={handleInputChangeTextarea}
+						/>
+						<p className={styles.characterCount}>{inputValue.length}/{maxLength}</p>
 					</div>
 
-					<div className={styles.formGroup}>
-						<label htmlFor="adSource" className={styles.label}>Ad Source</label>
-						<div className={styles.selectWrapper}>
-							<select
-								id="adSource"
-								name="adSource"
-								value={customerInfo.customerPhone}
-								onChange={handleInputChange}
-								className={styles.select}
-							>
-								<option value="">Select Ad Source</option>
-								<option value="referral">Referral</option>
-								<option value="online">Google</option>
-								<option value="other">Thumbtack</option>
-							</select>
-						</div>
-					</div>
+					{/*<div className={styles.formGroup}>*/}
+					{/*	<label htmlFor="adSource" className={styles.label}>Ad Source</label>*/}
+					{/*	<div className={styles.selectWrapper}>*/}
+					{/*		<select*/}
+					{/*			id="adSource"*/}
+					{/*			name="adSource"*/}
+					{/*			value={customerInfo.customerPhone}*/}
+					{/*			onChange={handleInputChange}*/}
+					{/*			className={styles.select}*/}
+					{/*		>*/}
+					{/*			<option value="">Select Ad Source</option>*/}
+					{/*			<option value="referral">Referral</option>*/}
+					{/*			<option value="online">Google</option>*/}
+					{/*			<option value="other">Thumbtack</option>*/}
+					{/*			<option value="custom">Other (Custom)</option>*/}
+					{/*		</select>*/}
+					{/*	</div>*/}
+
+					{/*</div>*/}
 				</div>
 
+				{/*//right side*/}
 				<div className={styles.column}>
 					<h2 className={styles.sectionTitle}>Client Address</h2>
+
+					//main service address
 					<div className={styles.formGroup}>
 						<label htmlFor="address" className={styles.label}>Main Service Address</label>
 						<div className={styles.addressField}>
@@ -153,6 +180,7 @@ export const InfoTab = ({customerInfo, handleInputChange}: Props) => {
 						</div>
 					</div>
 
+					//billing service address
 					<div className={styles.formGroup}>
 						<label htmlFor="billToAddress" className={styles.label}>Bill To</label>
 						<div className={styles.addressField}>

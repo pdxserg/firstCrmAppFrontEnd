@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {JobType} from "../UI/job/Job.tsx";
-import {CustomerType} from "../../../common/components/Create/CreateCustomer.tsx";
+import {CustomerType} from "../../../common/components/Create/CreateCustomer/CreateCustomer.tsx";
 
 type Response = {
 	totalCount: number,
@@ -47,27 +47,27 @@ export const jobsApi = createApi({
 				invalidatesTags: ["Jobs"]
 			}),
 
-			updateJob: build.mutation<{message: string},{ id:string,
+			updateJob: build.mutation<{message: string},{ jobId:string,
 				jobDetails?:string,
 				customerName?: string,
 				customerEmail?: string,
 				customerPhone?: string,
 			}>({
-				query: ({id, jobDetails,customerName,customerEmail,customerPhone}) => {
+				query: ({jobId, jobDetails,customerName,customerEmail,customerPhone}) => {
 
 					return {
 						method: "PUT",
-						url: `/api/jobs/${id}`,
+						url: `/api/jobs/${jobId}`,
 						body:{jobDetails,customerName,customerEmail,customerPhone}
 					}
 				},
 				invalidatesTags: ["Jobs"]
 			}),
 			deleteJob: build.mutation<{ message: string }, string>({
-				query: (id) => {
+				query: (jobId) => {
 					return {
 						method: "DELETE",
-						url: `/api/jobs/${id}`,
+						url: `/api/jobs/${jobId}`,
 					}
 				},
 				invalidatesTags: ["Jobs"]

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {CreateCustomer, CustomerType} from "../Create/CreateCustomer.tsx";
+import {CreateCustomer, CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
 import {FloatingInput} from "../FloatingInput/FloatingInput.tsx";
 type  Props= {
 	customers: CustomerType[] | undefined;

@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {CustomerType} from "../../../common/components/Create/CreateCustomer.tsx";
-import {AddressType} from "../../../common/components/AddressInput/AddressInput.tsx";
+import {CustomerType} from "../../../common/components/Create/CreateCustomer/CreateCustomer.tsx";
+import {AddressType} from "../../../common/components/Create/CreateCustomer/components/AddressInput/AddressInput.tsx";
 
 
 type Response = {

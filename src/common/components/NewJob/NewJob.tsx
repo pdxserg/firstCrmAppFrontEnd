@@ -5,7 +5,7 @@ import {JobDescription} from "../JobDescription/JobDescription.tsx";
 import {toast} from "react-toastify";
 import AutoTypeInput from "../MyInputWithDropdown/MyInputWithDropdown.tsx";
 import {useGetCustomersQuery} from "../../../features/customers/api/customersApi.ts";
-import {CustomerType} from "../Create/CreateCustomer.tsx";
+import {CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
 
 
 
@@ -30,7 +30,7 @@ export const NewJob = () => {
 		// Now this code will only run on subsequent renders when customers changes
 		if (customers ) {
 			const latestCustomer = customers[customers.length - 1];
-			handleNameSelect(latestCustomer.customerName, latestCustomer.id);
+			handleNameSelect(latestCustomer.customerName, latestCustomer.customerId);
 		}
 	}, [customers]);
 
@@ -43,7 +43,7 @@ export const NewJob = () => {
 	const [createJob] = useCreateJobMutation()
 
 	const createJobHandler = () => {
-		const customer = data?.items.find((item) => item.id === customerId)
+		const customer = data?.items.find((item) => item.customerId === customerId)
 		if (customer) {
 			createJob({customer, jobDetails})
 				.unwrap()

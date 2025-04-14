@@ -1,6 +1,6 @@
 // @flow
 
-import {AddressType} from "../AddressInput/AddressInput.tsx";
+import {AddressType} from "../Create/CreateCustomer/components/AddressInput/AddressInput.tsx";
 
 type Props = {
 address:AddressType

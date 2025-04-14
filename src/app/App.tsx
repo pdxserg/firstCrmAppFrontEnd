@@ -11,6 +11,8 @@ import {Home} from "../common/components/Home.tsx";
 
 import {Customers} from "../common/components/Customers/Customers.tsx";
 import Customer from "../common/components/Customer/Customer.tsx";
+import {CustomerJob} from "../common/components/CustomerJob/CustomerJob.tsx";
+import {CustomerJob2} from "../common/components/CustomerJob/CustomerJob2.tsx";
 
 export const Path = {
 	Main: "/",
@@ -20,7 +22,10 @@ export const Path = {
 	NewJob: "/jobs/new-job",
 	NewCustomer: "/jobs/new-customer",
 	Customers: "/customers",
-	Customer: "/customer/:id"
+	Customer: "/customer/:id",
+	CustomerJob: "/job/:id",
+	CustomerJobItems: "/job/:id/2",
+
 
 	// Login: "/login",
 } as const
@@ -32,7 +37,7 @@ function App() {
 
 			<Routes>
 				<Route path={Path.Main} element={<Layout/>}>
-					<Route index element={<Main />} />
+					<Route index element={<Main />} />¬
 					<Route path={Path.Header} element={<Home />} />
 					<Route path={Path.Jobs} element={<Jobs />} />
 					<Route path={Path.NewJob} element={<NewJob />} />
@@ -40,6 +45,9 @@ function App() {
 					<Route path={Path.Customers} element={<Customers />} />
 					{/*<Route path="/customer/:id" element={<CustomerDetail />} />*/}
 					<Route path={Path.Customer} element={<Customer />} />
+					<Route path={Path.CustomerJob} element={<CustomerJob />} />
+					<Route path={Path.CustomerJobItems} element={<CustomerJob2 />} />
+
 					<Route path={Path.NotFound} element={<Page404 />} />
 
 

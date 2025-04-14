@@ -1,6 +1,7 @@
 
 import styles from "./CustomerJobs.module.css";
-import {CustomerType} from "../../Customer.tsx";
+import {useNavigate} from "react-router-dom";
+import {CustomerType} from "../../../Create/CreateCustomer/CreateCustomer.tsx";
 
 
 
@@ -10,7 +11,13 @@ type Props = {
 };
 export const CustomerJobs = ({customerInfo}: Props) => {
 	console.log(customerInfo)
-const jobs=[{id:1, worcDeskription:"fsdfsdfsdf"},{id:2, worcDeskription:"fsdfsdfsdf"}]
+const jobs=[{id:"1", worcDeskription:"fsdfsdfsdf"},{id:"2", worcDeskription:"fsdfsdfsdf"}]
+
+	const navigate = useNavigate()
+	const handleRedirectToJob =(id:string)=>{
+navigate(`/job/${id}`)
+
+	}
 
 	return (
 		<div className={styles.tableContainer}>
@@ -61,10 +68,11 @@ const jobs=[{id:1, worcDeskription:"fsdfsdfsdf"},{id:2, worcDeskription:"fsdfsdf
 							{/*ID*/}
 							<div className={styles.cellID}>
 								<button className={styles.deleteButton}
-									// onClick={(e) => {
+									 onClick={() => {
+										 handleRedirectToJob(client.id)
 									//     e.stopPropagation()
 									//     setCustomerIdToDelete(client.id)
-									// }}
+									 }}
 								>{client.id}
 								</button>
 							</div>

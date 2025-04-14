@@ -6,66 +6,52 @@ import {useParams} from "react-router-dom";
 import {useGetCustomersByIdQuery} from "../../../features/customers/api/customersApi.ts";
 import {InfoTab} from "./tabContent/InfoTab/InfoTab.tsx";
 import {CustomerJobs} from "./tabContent/CustomerJobs/CustomerJobs.tsx";
+import {CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
 
 
 type Tab = 'info' | 'jobs' | 'estimates' | 'invoices' | 'payments' | 'addresses';
 
-export type CustomerType = {
-	id: string,
-	customerName: string
-	customerEmail: string
-	customerPhone: string
-	address: AddressType
 
-};
-export type AddressType={
-	houseStreet:string
-	suitApt:string
-	city:string
-	state:string
-	zip:string
-}
 interface CustomerProps {
 	// You can add props as needed
 }
 
 const Customer: React.FC<CustomerProps> = () => {
-	const { id } = useParams()
-	console.log('useparam',id)
+	const {id} = useParams()
+	console.log('useparam', id)
 	const [activeTab, setActiveTab] = useState<Tab>('info');
 
 	const [customerInfo, setCustomerInfo] = useState<CustomerType>(
 		{
-		id:"",
-		customerName: 'Customer name',
-		customerPhone: '4324523523',
-		customerEmail: '',
-		address: {houseStreet:"", city:'', zip:'', suitApt:"", state:'' },
-		// lastName: '',
-		// companyName: '',
-		// secondaryPhone: '',
-		// description: '',
-		// adSource: '',
-		// billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
-		// autoInvoicing: false,
-		// allowBilling: false,
-		// paymentTerms: 'Use default (use account value)',
-		// parentClient: ''
-	}
+			customerId: "",
+			customerName: 'Customer name',
+			customerPhone: '4324523523',
+			customerEmail: '',
+			address: {houseStreet: "", city: '', zip: '', suitApt: "", state: ''},
+			// lastName: '',
+			// companyName: '',
+			// secondaryPhone: '',
+			// description: '',
+			// adSource: '',
+			// billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
+			// autoInvoicing: false,
+			// allowBilling: false,
+			// paymentTerms: 'Use default (use account value)',
+			// parentClient: ''
+		}
 	)
-const{data, isLoading,isError}=useGetCustomersByIdQuery({id})
+	const {data, isLoading, isError} = useGetCustomersByIdQuery({id})
 
 	useEffect(() => {
-		if (data){
+		if (data) {
 			setCustomerInfo(data.customer)
 			console.log(data.customer)
 		}
 	}, [data]);
 
 
-
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		const { name, value } = e.target;
+		const {name, value} = e.target;
 		setCustomerInfo({
 			...customerInfo,
 			[name]: value
@@ -78,11 +64,11 @@ const{data, isLoading,isError}=useGetCustomersByIdQuery({id})
 	};
 
 	const renderTabContent = () => {
-		 switch (activeTab) {
+		switch (activeTab) {
 			case 'info':
 				return <InfoTab customerInfo={customerInfo} handleInputChange={handleInputChange}/>
 			case 'jobs':
-				return <CustomerJobs customerInfo={customerInfo} />
+				return <CustomerJobs customerInfo={customerInfo}/>
 			case 'estimates':
 				return <div className={styles.tabContent}>Estimates content will be displayed here</div>;
 			case 'invoices':

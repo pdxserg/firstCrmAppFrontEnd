@@ -1,14 +1,14 @@
 import {ChangeEvent, useState} from "react";
-import {EmailInput} from "../EmailInput/EmailInput.tsx";
+import {EmailInput} from "./components/EmailInput/EmailInput.tsx";
 import styles from "./CreateCustomer.module.css"
 import {toast} from "react-toastify";
-import {AddressInput, AddressType} from "../AddressInput/AddressInput.tsx";
-import {useCreateCustomerMutation} from "../../../features/customers/api/customersApi.ts";
-import {FloatingInput} from "../FloatingInput/FloatingInput.tsx";
+import {AddressInput, AddressType} from "./components/AddressInput/AddressInput.tsx";
+import {useCreateCustomerMutation} from "../../../../features/customers/api/customersApi.ts";
+import {FloatingInput} from "../../FloatingInput/FloatingInput.tsx";
 import {useNavigate} from "react-router-dom";
 
 export type CustomerType = {
-	id: string,
+	customerId: string,
 	customerName: string
 	customerEmail: string
 	customerPhone: string
@@ -35,7 +35,7 @@ export const CreateCustomer = ({onCancel, onSuccess}: Props) => {
 			.unwrap()
 			.then((res) => {
 				onSuccess()
-				navigate(`/customer/${res.id}`)
+				navigate(`/customer/${res.customerId}`)
 				toast.success("Success!")
 			})
 			.catch((error) => {

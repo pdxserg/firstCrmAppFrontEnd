@@ -6,16 +6,16 @@ import {toast} from "react-toastify";
 
 import {ModalRadix} from "../../../../common/components/ModalRadix/ModalRadix.tsx";
 import {useState} from "react";
-import {AddressType} from "../../../../common/components/AddressInput/AddressInput.tsx";
+import {AddressType} from "../../../../common/components/Create/CreateCustomer/components/AddressInput/AddressInput.tsx";
 import {MapNavigation} from "../../../../common/components/MapNavigation/MapNavigation.tsx";
 
 export type JobType = {
-	id: string,
+	jobId: string,
 	jobNumber: number
 	customerName: string
 	customerEmail: string
 	customerPhone: string
-	jobDetails: string
+	jobDetails:{description:string, TypeEquipment:string}
 	address:AddressType
 
 };
@@ -30,10 +30,10 @@ export const Job = ({jobs}: Props) => {
 
 
 
-	const deleteJobHandler = (id: string) => {
+	const deleteJobHandler = (jobIdToDelete: string) => {
 		// 	updateEntityStatus("loading")
 		setJobIdToDelete(null)
-		deleteTask(id)
+		deleteTask(jobIdToDelete)
 			.unwrap()
 			.then((res) => {
 				toast.success(res.message)
@@ -47,7 +47,7 @@ export const Job = ({jobs}: Props) => {
 			});
 	}
 
-	const updateHandler = (id: string,
+	const updateHandler = (jobId: string,
 	                       customerName?: string,
 	                       customerEmail?: string,
 	                       customerPhone?: string,
@@ -55,7 +55,7 @@ export const Job = ({jobs}: Props) => {
 	) => {
 
 		// 	updateEntityStatus("loading")
-		updateJob({id, jobDetails, customerName, customerEmail, customerPhone})
+		updateJob({jobId, jobDetails, customerName, customerEmail, customerPhone})
 
 			.unwrap()
 			.then((res) => {
@@ -74,7 +74,7 @@ export const Job = ({jobs}: Props) => {
 	return (
 		<>
 			{jobs!.map(el => {
-				return <li key={el.id} className={styles.job}>
+				return <li key={el.jobId} className={styles.job}>
 					<h2>Job # {el.jobNumber}</h2>
 
 					<p>Address:</p>
@@ -82,17 +82,17 @@ export const Job = ({jobs}: Props) => {
 					<MapNavigation address={el.address}/>
 					<p>Name:
 						<EditableSpan value={el.customerName}
-						              onChange={(customerName) => updateHandler(el.id, customerName)}/>
+						              onChange={(customerName) => updateHandler(el.jobId, customerName)}/>
 					</p>
 
 					<p>Phone:
 						<EditableSpan value={el.customerPhone}
-						              onChange={(customerPhone) => updateHandler(el.id, undefined, undefined, customerPhone)}/>
+						              onChange={(customerPhone) => updateHandler(el.jobId, undefined, undefined, customerPhone)}/>
 					</p>
 
 					<p>Email:
 						<EditableSpan value={el.customerEmail}
-						              onChange={(customerEmail) => updateHandler(el.id, undefined, customerEmail)}/>
+						              onChange={(customerEmail) => updateHandler(el.jobId, undefined, customerEmail)}/>
 					</p>
 					<div>
 						<h3>Address</h3>
@@ -101,11 +101,11 @@ export const Job = ({jobs}: Props) => {
 					</div>
 					<p> Description: </p>
 					<div className={styles.jobDescription}>
-						<EditableSpan value={el.jobDetails}
-						              onChange={(jobDetails) => updateHandler(el.id, undefined, undefined, undefined, jobDetails)}/>
+						<EditableSpan value={el.jobDetails.description}
+						              onChange={(jobDetails) => updateHandler(el.jobId, undefined, undefined, undefined, jobDetails)}/>
 					</div>
 
-					<button onClick={() => setJobIdToDelete(el.id)}>Delete</button>
+					<button onClick={() => setJobIdToDelete(el.jobId)}>Delete</button>
 
 					{/*<ModalRadix open={isModalOpen} onClose={() => setIsModalOpen(false)} title={'Delete Post'}*/}
 					{/*            description={`Are you sure you want to delete this post -${el.customerName}?`}>*/}

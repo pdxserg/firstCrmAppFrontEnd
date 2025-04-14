@@ -6,7 +6,7 @@ import {useState} from "react";
 import {Path} from "../../../app/App.tsx";
 import {Link} from "react-router-dom";
 import styles from "../Customers/CustomerList.module.css";
-import {CreateCustomer} from "./CreateCustomer.tsx";
+import {CreateCustomer} from "./CreateCustomer/CreateCustomer.tsx";
 
 
 export const Create = ( ) => {
