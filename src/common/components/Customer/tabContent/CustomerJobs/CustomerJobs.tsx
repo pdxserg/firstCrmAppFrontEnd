@@ -1,16 +1,14 @@
 import styles from "./CustomerJobs.module.css";
 import {useNavigate} from "react-router-dom";
-import {CustomerType} from "../../../Create/CreateCustomer/CreateCustomer.tsx";
-import { useGetJobsQuery} from "../../../../../features/jobs/api/jobApi.ts";
 import {JobType} from "../../../../../features/jobs/UI/job/Job.tsx";
 
 
 type Props = {
-	customerInfo: CustomerType
+	jobs: JobType[]|undefined
 };
-export const CustomerJobs = ({customerInfo}: Props) => {
-	const {data } = useGetJobsQuery({searchTerm: customerInfo.customerId})
-	const jobs: JobType[] | undefined = data?.items
+export const CustomerJobs = ({jobs}: Props) => {
+
+
 	const navigate = useNavigate()
 
 

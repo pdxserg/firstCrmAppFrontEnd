@@ -1,11 +1,12 @@
 // @flow
 import styles from'./CustomerJob.module.css'
-import {useState} from "react";
-import {CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
+import {useEffect, useState} from "react";
 import {CustomerJob2} from "./CustomerJob2.tsx";
 import {Details} from "./Details/Details.tsx";
 import {useParams} from "react-router-dom";
 import {useGetJobsByIdQuery} from "../../../features/jobs/api/jobApi.ts";
+import {JobType} from "../../../features/jobs/UI/job/Job.tsx";
+import {AddressType} from "../Create/CreateCustomer/components/AddressInput/AddressInput.tsx";
 
 
 type Tab = 'details' | 'items' | 'estimates'  | 'payments' | 'attachments';
@@ -13,63 +14,59 @@ type Tab = 'details' | 'items' | 'estimates'  | 'payments' | 'attachments';
 
 export const CustomerJob = () => {
 
-
-
-
 	const { id } = useParams()
-	console.log('useparam',id)
+	const{data}=useGetJobsByIdQuery({id})
+
+
 	const [activeTab, setActiveTab] = useState<Tab>('details');
-
-	const [customerInfo, setCustomerInfo] = useState<CustomerType>(
-		{
-			customerId:"777",
-			customerName: 'Customer name',
-			customerPhone: '4324523523',
-			customerEmail: '',
-			address: {houseStreet:"", city:'', zip:'', suitApt:"", state:'' },
-			// lastName: '',
-			// companyName: '',
-			// secondaryPhone: '',
-			// description: '',
-			// adSource: '',
-			// billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
-			// autoInvoicing: false,
-			// allowBilling: false,
-			// paymentTerms: 'Use default (use account value)',
-			// parentClient: ''
+	const [jobInfo, setJobInfo] = useState<JobType>({
+		jobId: "string",
+		jobNumber: 0,
+		customerId: "string",
+		customerName: "string",
+		customerEmail: "string",
+		customerPhone: "string",
+		jobDetails:{description:"string", typeEquipment:"string"},
+		address:{
+			houseStreet:"string",
+			suitApt:"string",
+			city:"string",
+			state:"string",
+			zip:"string",
 		}
-	)
-	 const{data}=useGetJobsByIdQuery({id})
+	})
 
-	const job = data?.items
-	console.log(job)
-	//
-	// useEffect(() => {
-	// 	if (data){
-	// 		setCustomerInfo(data.customer)
-	// 		console.log(data.customer)
-	// 	}
-	// }, [data]);
+
+
+	useEffect(() => {
+		if (data){
+			setJobInfo(data.job)
+
+		}
+	}, [data]);
 
 
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
-		setCustomerInfo({
-			...customerInfo,
+		console.log(name,value)
+		setJobInfo({
+			...jobInfo,
 			[name]: value
 		});
 	};
 
 	const handleSave = () => {
 		alert('Customer information saved!');
-		console.log(customerInfo);
+		  // console.log(customerInfo.customerName);
 	};
 
+
+	   if (!jobInfo) return <div>Customer not found</div>;
 	const renderTabContent = () => {
 		switch (activeTab) {
 			case 'details':
-				return <Details customerInfo={customerInfo} handleInputChange={handleInputChange}/>
+				return <Details jobInfo={jobInfo} handleInputChange={handleInputChange}/>
 			case 'items':
 				return   < CustomerJob2 />
 			case 'payments':
@@ -84,12 +81,13 @@ export const CustomerJob = () => {
 	};
 	// if (isLoading) return <div>Loading...</div>;
 	// if (isError) return <div>Error loading customer</div>;
-	// if (!data) return <div>Customer not found</div>;
+	//  if (!data) return <div>Customer not found</div>;
 
 	return (
 		<div className={styles.customerContainer}>
 			<div className={styles.header}>
 				<nav className={styles.nav}>
+					<h2>Job #{jobInfo.jobNumber}-{jobInfo.customerName}</h2>
 					<ul className={styles.tabs}>
 						<li
 							className={`${styles.tab} ${activeTab === 'details' ? styles.active : ''}`}

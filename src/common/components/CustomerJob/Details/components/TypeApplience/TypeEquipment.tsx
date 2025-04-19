@@ -1,20 +1,18 @@
 import React, { useState, ChangeEvent } from 'react';
 import styles from './TypeEquipment.module.css';
+import {JobType} from "../../../../../../features/jobs/UI/job/Job.tsx";
 
 
 
 
-interface CustomerInfo {
-	 adSource?: string;
-	customAdSource?: string;
-}
+
 
 interface AdSourceSelectProps {
-	customerInfo?: CustomerInfo;
-	setCustomerInfo?: React.Dispatch<React.SetStateAction<CustomerInfo>>;
+	jobInfo: JobType;
+
 }
 
-const TypeEquipment: React.FC<AdSourceSelectProps> = ({ customerInfo="www", setCustomerInfo }) => {
+const TypeEquipment = ({jobInfo }:AdSourceSelectProps) => {
 	const [isAddingNew, setIsAddingNew] = useState(false);
 	const [newAdSource, setNewAdSource] = useState('');
 	const [customAdSources, setCustomAdSources] = useState<string[]>([]);
@@ -71,7 +69,7 @@ const TypeEquipment: React.FC<AdSourceSelectProps> = ({ customerInfo="www", setC
 				<select
 					id="adSource"
 					name="adSource"
-					value={customerInfo}
+					value={jobInfo.jobDetails.typeEquipment}
 					onChange={handleSelectChange}
 					className={styles.select}
 				>

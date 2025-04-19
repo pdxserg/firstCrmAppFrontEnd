@@ -6,7 +6,6 @@ type Response = {
 	totalCount: number,
 	resultCode: number,
 	items: JobType[]
-
 }
 export const jobsApi = createApi({
 	reducerPath: 'jobsApi',
@@ -30,7 +29,7 @@ export const jobsApi = createApi({
 				},
 				providesTags: ["Jobs"]
 			}),
-			getJobsById: build.query<Response, { id:string|null|undefined }>({
+			getJobsById: build.query<{message:string, job:JobType}, { id:string|null|undefined }>({
 				query: ({id}) => {
 					return {
 						url: `/api/jobs/${id}`,

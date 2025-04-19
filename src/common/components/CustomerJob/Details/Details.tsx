@@ -2,16 +2,16 @@
 
 
 import styles from "./Details.module.css"
-import {CustomerType} from "../../Create/CreateCustomer/CreateCustomer.tsx";
-import {ChangeEvent, useState} from "react";
+ import {ChangeEvent, useState} from "react";
 import TypeEquipment from "./components/TypeApplience/TypeEquipment.tsx";
+import {JobType} from "../../../../features/jobs/UI/job/Job.tsx";
 
 type Props = {
-	customerInfo: CustomerType
+	jobInfo: JobType
 	handleInputChange: (e: any) => void
 	maxLength?:number
 };
-export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props) => {
+export const Details = ({jobInfo, handleInputChange, maxLength=160}: Props) => {
 
 	const [inputValue, setInputValue] = useState<string>('');
 
@@ -22,6 +22,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 		}
 		setInputValue(value);
 	}
+
 
 	return (
 		<div className={styles.tabContent}>
@@ -38,8 +39,8 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 								<input
 									type="text"
 									id="firstName"
-									name="firstName"
-									value={customerInfo.customerName}
+									name="customerName"
+									value={jobInfo.customerName}
 									onChange={handleInputChange}
 									className={styles.input}
 								/>
@@ -50,7 +51,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 									type="text"
 									id="lastName"
 									name="lastName"
-									value={customerInfo.customerName}
+									value={jobInfo.customerName}
 									onChange={handleInputChange}
 									className={styles.input}
 								/>
@@ -65,7 +66,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 							type="text"
 							id="companyName"
 							name="companyName"
-							value={customerInfo.customerName}
+							value={jobInfo.customerName}
 							onChange={handleInputChange}
 							className={styles.input}
 						/>
@@ -81,7 +82,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 								type="tel"
 								id="phoneNumber"
 								name="phoneNumber"
-								value={customerInfo.customerPhone}
+								value={jobInfo.customerPhone}
 								onChange={handleInputChange}
 								className={styles.input}
 							/>
@@ -103,7 +104,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 								type="tel"
 								id="secondaryPhone"
 								name="secondaryPhone"
-								value={customerInfo.customerPhone}
+								value={jobInfo.customerPhone}
 								onChange={handleInputChange}
 								className={styles.input}
 							/>
@@ -120,20 +121,20 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 							type="email"
 							id="email"
 							name="email"
-							value={customerInfo.customerEmail}
+							value={jobInfo.customerEmail}
 							onChange={handleInputChange}
 							className={styles.input}
 						/>
 					</div>
 
 					{/*//ad source*/}
-					<TypeEquipment  />
+					<TypeEquipment  jobInfo={jobInfo}/>
 
 					{/*//description*/}
 					<div className={styles.textAreaContainer}>
 						<textarea
 							className={styles.textArea}
-							value={inputValue}
+							value={jobInfo.jobDetails.description}
 							onChange={handleInputChangeTextarea}
 						/>
 						<p className={styles.characterCount}>{inputValue.length}/{maxLength}</p>
@@ -164,7 +165,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 				<div className={styles.column}>
 					<h2 className={styles.sectionTitle}>Client Address</h2>
 
-					//main service address
+					{/*//main service address*/}
 					<div className={styles.formGroup}>
 						<label htmlFor="address" className={styles.label}>Main Service Address</label>
 						<div className={styles.addressField}>
@@ -173,14 +174,14 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 								type="text"
 								id="address"
 								name="address"
-								value={customerInfo.address.zip}
+								value={jobInfo.address.houseStreet}
 								onChange={handleInputChange}
 								className={styles.input}
 							/>
 						</div>
 					</div>
 
-					//billing service address
+					{/*//billing service address*/}
 					<div className={styles.formGroup}>
 						<label htmlFor="billToAddress" className={styles.label}>Bill To</label>
 						<div className={styles.addressField}>
@@ -189,7 +190,7 @@ export const Details = ({customerInfo, handleInputChange, maxLength=160}: Props)
 								type="text"
 								id="billToAddress"
 								name="billToAddress"
-								value={customerInfo.address.zip}
+								value={jobInfo.address.houseStreet}
 								onChange={handleInputChange}
 								className={styles.input}
 							/>

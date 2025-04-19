@@ -7,6 +7,7 @@ import {useGetCustomersByIdQuery} from "../../../features/customers/api/customer
 import {InfoTab} from "./tabContent/InfoTab/InfoTab.tsx";
 import {CustomerJobs} from "./tabContent/CustomerJobs/CustomerJobs.tsx";
 import {CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
+import {useGetJobsQuery} from "../../../features/jobs/api/jobApi.ts";
 
 
 type Tab = 'info' | 'jobs' | 'estimates' | 'invoices' | 'payments' | 'addresses';
@@ -18,7 +19,6 @@ interface CustomerProps {
 
 const Customer: React.FC<CustomerProps> = () => {
 	const {id} = useParams()
-	console.log('useparam', id)
 	const [activeTab, setActiveTab] = useState<Tab>('info');
 
 	const [customerInfo, setCustomerInfo] = useState<CustomerType>(
@@ -26,18 +26,10 @@ const Customer: React.FC<CustomerProps> = () => {
 			customerId: "",
 			customerName: 'Customer name',
 			customerPhone: '4324523523',
+			customerNumber: '4324523523',
 			customerEmail: '',
 			address: {houseStreet: "", city: '', zip: '', suitApt: "", state: ''},
-			// lastName: '',
-			// companyName: '',
-			// secondaryPhone: '',
-			// description: '',
-			// adSource: '',
-			// billToAddress: '234 SE 136th Ave, Vancouver, Washington 98684',
-			// autoInvoicing: false,
-			// allowBilling: false,
-			// paymentTerms: 'Use default (use account value)',
-			// parentClient: ''
+
 		}
 	)
 	const {data, isLoading, isError} = useGetCustomersByIdQuery({id})
@@ -48,6 +40,8 @@ const Customer: React.FC<CustomerProps> = () => {
 			console.log(data.customer)
 		}
 	}, [data]);
+
+	const {data: jobInfo } = useGetJobsQuery({searchTerm:customerInfo.customerId})
 
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -68,7 +62,7 @@ const Customer: React.FC<CustomerProps> = () => {
 			case 'info':
 				return <InfoTab customerInfo={customerInfo} handleInputChange={handleInputChange}/>
 			case 'jobs':
-				return <CustomerJobs customerInfo={customerInfo}/>
+				return <CustomerJobs jobs={jobInfo?.items}/>
 			case 'estimates':
 				return <div className={styles.tabContent}>Estimates content will be displayed here</div>;
 			case 'invoices':
@@ -100,7 +94,7 @@ const Customer: React.FC<CustomerProps> = () => {
 							className={`${styles.tab} ${activeTab === 'jobs' ? styles.active : ''}`}
 							onClick={() => setActiveTab('jobs')}
 						>
-							Jobs(10)
+							Jobs({jobInfo?.totalCount})
 						</li>
 						<li
 							className={`${styles.tab} ${activeTab === 'estimates' ? styles.active : ''}`}
