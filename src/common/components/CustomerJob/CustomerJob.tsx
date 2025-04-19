@@ -4,6 +4,8 @@ import {useState} from "react";
 import {CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
 import {CustomerJob2} from "./CustomerJob2.tsx";
 import {Details} from "./Details/Details.tsx";
+import {useParams} from "react-router-dom";
+import {useGetJobsByIdQuery} from "../../../features/jobs/api/jobApi.ts";
 
 
 type Tab = 'details' | 'items' | 'estimates'  | 'payments' | 'attachments';
@@ -14,8 +16,8 @@ export const CustomerJob = () => {
 
 
 
-	// const { id } = useParams()
-	// console.log('useparam',id)
+	const { id } = useParams()
+	console.log('useparam',id)
 	const [activeTab, setActiveTab] = useState<Tab>('details');
 
 	const [customerInfo, setCustomerInfo] = useState<CustomerType>(
@@ -37,7 +39,10 @@ export const CustomerJob = () => {
 			// parentClient: ''
 		}
 	)
-	// const{data, isLoading,isError}=useGetCustomersByIdQuery({id})
+	 const{data}=useGetJobsByIdQuery({id})
+
+	const job = data?.items
+	console.log(job)
 	//
 	// useEffect(() => {
 	// 	if (data){

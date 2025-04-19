@@ -20,12 +20,22 @@ export const jobsApi = createApi({
 	tagTypes: ["Jobs"],
 	endpoints: build => {
 		return {
-			getJobs: build.query<Response, { jobNumber:string|null|undefined }>({
-				query: ({jobNumber}) => {
+			getJobs: build.query<Response, { searchTerm:string|null|undefined }>({
+				query: ({searchTerm}) => {
 					return {
 						url: '/api/jobs',
 						method: 'GET',
-						params: jobNumber !== undefined ? { jobNumber } : {},
+						params: searchTerm !== undefined ? { searchTerm } : {},
+					}
+				},
+				providesTags: ["Jobs"]
+			}),
+			getJobsById: build.query<Response, { id:string|null|undefined }>({
+				query: ({id}) => {
+					return {
+						url: `/api/jobs/${id}`,
+						method: 'GET',
+
 					}
 				},
 				providesTags: ["Jobs"]
@@ -77,4 +87,4 @@ export const jobsApi = createApi({
 })
 
 // 7
-export const {useDeleteJobMutation, useGetJobsQuery, useCreateJobMutation, useUpdateJobMutation} = jobsApi
+export const {useDeleteJobMutation, useGetJobsQuery, useGetJobsByIdQuery, useCreateJobMutation, useUpdateJobMutation} = jobsApi

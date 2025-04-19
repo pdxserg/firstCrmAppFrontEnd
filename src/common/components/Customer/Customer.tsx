@@ -100,7 +100,7 @@ const Customer: React.FC<CustomerProps> = () => {
 							className={`${styles.tab} ${activeTab === 'jobs' ? styles.active : ''}`}
 							onClick={() => setActiveTab('jobs')}
 						>
-							Jobs(0)
+							Jobs(10)
 						</li>
 						<li
 							className={`${styles.tab} ${activeTab === 'estimates' ? styles.active : ''}`}

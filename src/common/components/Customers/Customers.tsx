@@ -5,6 +5,7 @@ import {CustomerList} from "./CustomerList.tsx";
 export const Customers = () => {
 	const {data} = useGetCustomersQuery()
 	const customers = data?.items
+	console.log(customers)
 
 
 	return (

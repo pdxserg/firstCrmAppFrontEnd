@@ -1,23 +1,24 @@
-
 import styles from "./CustomerJobs.module.css";
 import {useNavigate} from "react-router-dom";
 import {CustomerType} from "../../../Create/CreateCustomer/CreateCustomer.tsx";
-
-
+import { useGetJobsQuery} from "../../../../../features/jobs/api/jobApi.ts";
+import {JobType} from "../../../../../features/jobs/UI/job/Job.tsx";
 
 
 type Props = {
 	customerInfo: CustomerType
 };
 export const CustomerJobs = ({customerInfo}: Props) => {
-	console.log(customerInfo)
-const jobs=[{id:"1", worcDeskription:"fsdfsdfsdf"},{id:"2", worcDeskription:"fsdfsdfsdf"}]
-
+	const {data } = useGetJobsQuery({searchTerm: customerInfo.customerId})
+	const jobs: JobType[] | undefined = data?.items
 	const navigate = useNavigate()
-	const handleRedirectToJob =(id:string)=>{
-navigate(`/job/${id}`)
+
+
+	const handleRedirectToJob = (id: string) => {
+		navigate(`/job/${id}`)
 
 	}
+
 
 	return (
 		<div className={styles.tableContainer}>
@@ -50,49 +51,53 @@ navigate(`/job/${id}`)
 					<div className={styles.cell}>State</div>
 				</div>
 
-				{jobs.length > 0 ? (
-					jobs.map((client) => (
-						<div
-							key={client.id}
-							className={styles.tableRow}
-							// onClick={() => handleClientSelect(client.id)}
-						>
-							<div className={styles.checkboxCell} onClick={(e) => e.stopPropagation()}>
-								<input
-									type="checkbox"
-									// checked={selectedClientIds.includes(client.id)}
-									// onChange={() => handleCheckboxChange(client.id)}
-								/>
-							</div>
+				{jobs ? (
+					jobs.length > 0 ? (
+						jobs.map((job) => (
+							<div
+								key={job.jobId}
+								className={styles.tableRow}
+								// onClick={() => handleClientSelect(client.id)}
+							>
+								<div className={styles.checkboxCell} onClick={(e) => e.stopPropagation()}>
+									<input
+										type="checkbox"
+										// checked={selectedClientIds.includes(client.id)}
+										// onChange={() => handleCheckboxChange(client.id)}
+									/>
+								</div>
 
-							{/*ID*/}
-							<div className={styles.cellID}>
-								<button className={styles.deleteButton}
-									 onClick={() => {
-										 handleRedirectToJob(client.id)
-									//     e.stopPropagation()
-									//     setCustomerIdToDelete(client.id)
-									 }}
-								>{client.id}
-								</button>
-							</div>
+								{/*ID*/}
+								<div className={styles.cellID}>
+									<button className={styles.deleteButton}
+									        onClick={() => {
+										        handleRedirectToJob(job.jobId)
+										        //     e.stopPropagation()
+										        //     setCustomerIdToDelete(client.id)
+									        }}
+									>{job.jobNumber}
+									</button>
+								</div>
 
-							{/*Name*/}
-							<div className={styles.cell}>{client.worcDeskription}</div>
-							{/*Zip*/}
-							<div className={styles.cell}>{client.id || '-'}</div>
-							{/*Address*/}
-							<div className={styles.cell}>{client.worcDeskription || '-'}</div>
-							{/*City*/}
-							<div className={styles.cell}>{client.worcDeskription || '-'}</div>
-							{/*State*/}
-							<div className={styles.cell}>{client.worcDeskription || '-'}</div>
+								{/*Name*/}
+								<div className={styles.cell}>{job.jobDetails.typeEquipment}</div>
+								{/*Zip*/}
+								<div className={styles.cell}>{job.jobDetails.typeEquipment || '-'}</div>
+								{/*Address*/}
+								<div className={styles.cell}>{job.jobDetails.typeEquipment || '-'}</div>
+								{/*City*/}
+								<div className={styles.cell}>{job.jobDetails.typeEquipment || '-'}</div>
+								{/*State*/}
+								<div className={styles.cell}>{job.jobDetails.typeEquipment || '-'}</div>
+							</div>
+						))
+					) : (
+						<div className={styles.emptyState}>
+							No clients found. Try adjusting your search or add a new client.
 						</div>
-					))
+					)
 				) : (
-					<div className={styles.emptyState}>
-						No clients found. Try adjusting your search or add a new client.
-					</div>
+					<div>loading</div>
 				)}
 			</div>
 		</div>

@@ -43,7 +43,7 @@
 
 .tableRow {
     display: grid;
-    grid-template-columns: 40px 40px 1.5fr 1fr 1.5fr 1fr 1fr;
+    grid-template-columns: 40px 70px 1.5fr 1fr 1.5fr 1fr 1fr;
     border-bottom: 1px solid #f0f0f0;
     cursor: pointer;
 }

@@ -7,18 +7,6 @@ import {toast} from "react-toastify";
 import {CreateCustomer, CustomerType} from "../Create/CreateCustomer/CreateCustomer.tsx";
 import {useNavigate} from "react-router-dom";
 
-export interface ClientType {
-	id: string;
-	name: string;
-	email?: string;
-	// company?: string;
-	address?: string;
-	phone?: string;
-	// created?: string;
-}
-
-
-
 
 type CustomerProps = {
 	customers: CustomerType[] | undefined;
@@ -58,6 +46,7 @@ export const CustomerList = ({
 
 
 	const handleClientSelect = (id: string) => {
+
 		navigate(`/customer/${id}`)
 
 	};
@@ -181,7 +170,7 @@ export const CustomerList = ({
 											         e.stopPropagation()
 													 setCustomerIdToDelete(client.customerId)
 										}}
-										>x</button>
+										>{client.customerNumber}</button>
 									</div>
 									<div className={styles.nameCell}>
 										<div>{client.customerName}</div>

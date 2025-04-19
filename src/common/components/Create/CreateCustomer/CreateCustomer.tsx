@@ -8,7 +8,8 @@ import {FloatingInput} from "../../FloatingInput/FloatingInput.tsx";
 import {useNavigate} from "react-router-dom";
 
 export type CustomerType = {
-	customerId: string,
+	customerId: string
+	customerNumber: string
 	customerName: string
 	customerEmail: string
 	customerPhone: string

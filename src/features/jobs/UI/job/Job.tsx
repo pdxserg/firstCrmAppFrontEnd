@@ -12,10 +12,11 @@ import {MapNavigation} from "../../../../common/components/MapNavigation/MapNavi
 export type JobType = {
 	jobId: string,
 	jobNumber: number
+	customerId: string
 	customerName: string
 	customerEmail: string
 	customerPhone: string
-	jobDetails:{description:string, TypeEquipment:string}
+	jobDetails:{description:string, typeEquipment:string}
 	address:AddressType
 
 };
@@ -99,7 +100,8 @@ export const Job = ({jobs}: Props) => {
 						<p>some address</p>
 
 					</div>
-					<p> Description: </p>
+					<h3> Description: </h3>
+					<div>{el.jobDetails.typeEquipment}</div>
 					<div className={styles.jobDescription}>
 						<EditableSpan value={el.jobDetails.description}
 						              onChange={(jobDetails) => updateHandler(el.jobId, undefined, undefined, undefined, jobDetails)}/>
@@ -107,13 +109,6 @@ export const Job = ({jobs}: Props) => {
 
 					<button onClick={() => setJobIdToDelete(el.jobId)}>Delete</button>
 
-					{/*<ModalRadix open={isModalOpen} onClose={() => setIsModalOpen(false)} title={'Delete Post'}*/}
-					{/*            description={`Are you sure you want to delete this post -${el.customerName}?`}>*/}
-					{/*	<div>*/}
-					{/*		<button onClick={() => deleteJobHandler(el.id)}>YES</button>*/}
-					{/*		<button onClick={() => setIsModalOpen(false)}>NO</button>*/}
-					{/*	</div>*/}
-					{/*</ModalRadix>*/}
 				</li>
 
 			})}
