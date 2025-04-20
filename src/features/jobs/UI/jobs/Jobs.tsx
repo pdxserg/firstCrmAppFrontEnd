@@ -8,7 +8,7 @@ import { useState} from "react";
 export const Jobs = () => {
 const[jobNumber,setJobNumber]=useState<string|null|undefined>(undefined)
 	const [searchParams, setSearchParams]=useState<string>("")
-		const{data, refetch}=useGetJobsQuery({jobNumber})
+		const{data, refetch}=useGetJobsQuery({searchTerm:jobNumber})
 
 
 

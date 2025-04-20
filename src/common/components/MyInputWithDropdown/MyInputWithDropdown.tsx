@@ -64,13 +64,13 @@ const handleCreateNewCustomer=() => {
 
 						</li>
 						{filteredNames?.map((item) => (
-							<li key={item.id}>
+							<li key={item.customerId}>
 								<button
-									onClick={() => handleSelect(item.customerName, item.id)}>{item.customerName}</button>
+									onClick={() => handleSelect(item.customerName, item.customerId)}>{item.customerName}</button>
 							</li>
 						))}
 					</ul>
-					{create && <CreateCustomer  />}
+					{create && <CreateCustomer onSuccess={()=>setCreate(false)}  />}
 				</div>
 
 

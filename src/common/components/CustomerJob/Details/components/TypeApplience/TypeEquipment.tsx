@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import  { useState, ChangeEvent } from 'react';
 import styles from './TypeEquipment.module.css';
 import {JobType} from "../../../../../../features/jobs/UI/job/Job.tsx";
 

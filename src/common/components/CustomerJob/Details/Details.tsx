@@ -13,7 +13,7 @@ type Props = {
 };
 export const Details = ({jobInfo, handleInputChange, maxLength=160}: Props) => {
 
-	const [inputValue, setInputValue] = useState<string>('');
+	const [inputValue, setInputValue] = useState<string>(jobInfo.jobDetails.description);
 
 	const handleInputChangeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let value = e.target.value;
@@ -81,7 +81,7 @@ export const Details = ({jobInfo, handleInputChange, maxLength=160}: Props) => {
 							<input
 								type="tel"
 								id="phoneNumber"
-								name="phoneNumber"
+								name="customerPhone"
 								value={jobInfo.customerPhone}
 								onChange={handleInputChange}
 								className={styles.input}
@@ -120,7 +120,7 @@ export const Details = ({jobInfo, handleInputChange, maxLength=160}: Props) => {
 						<input
 							type="email"
 							id="email"
-							name="email"
+							name="customerEmail"
 							value={jobInfo.customerEmail}
 							onChange={handleInputChange}
 							className={styles.input}
@@ -134,7 +134,7 @@ export const Details = ({jobInfo, handleInputChange, maxLength=160}: Props) => {
 					<div className={styles.textAreaContainer}>
 						<textarea
 							className={styles.textArea}
-							value={jobInfo.jobDetails.description}
+							value={inputValue}
 							onChange={handleInputChangeTextarea}
 						/>
 						<p className={styles.characterCount}>{inputValue.length}/{maxLength}</p>

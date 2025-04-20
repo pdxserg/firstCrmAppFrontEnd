@@ -6,7 +6,6 @@ import {Details} from "./Details/Details.tsx";
 import {useParams} from "react-router-dom";
 import {useGetJobsByIdQuery} from "../../../features/jobs/api/jobApi.ts";
 import {JobType} from "../../../features/jobs/UI/job/Job.tsx";
-import {AddressType} from "../Create/CreateCustomer/components/AddressInput/AddressInput.tsx";
 
 
 type Tab = 'details' | 'items' | 'estimates'  | 'payments' | 'attachments';
